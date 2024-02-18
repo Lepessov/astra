@@ -1,20 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace app\Http\Controllers;
 
 use App\Models\Post;
+use app\Models\SkillFund;
 use App\Traits\ApiResponse;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
-class PostController extends Controller
+class SkillFundController extends Controller
 {
     use ApiResponse;
 
     public function mainIndex()
     {
-        $posts = Post::query()->latest()->take(5)->get();
+        $posts = SkillFund::query()->latest()->take(5)->get();
 
         return $this->successResponse($posts, ResponseAlias::HTTP_OK, "success");
     }

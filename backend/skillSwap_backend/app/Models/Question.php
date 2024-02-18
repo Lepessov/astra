@@ -1,29 +1,20 @@
 <?php
 
-namespace App\Models;
+namespace app\Models;
+
 
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Question extends Model
 {
     protected $fillable = [
         'title',
-        'content',
+        'description',
         'student_id',
         'title',
         'photo',
         'status',
     ];
-
-    public function student()
-    {
-        return $this->belongsTo(Student::class);
-    }
-
-    public function applications()
-    {
-        return $this->hasMany(Application::class);
-    }
 
     public function categories()
     {

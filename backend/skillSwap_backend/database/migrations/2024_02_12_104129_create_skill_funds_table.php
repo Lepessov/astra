@@ -11,13 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('messages', function (Blueprint $table) {
+        Schema::create('skill_funds', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedBigInteger('chat_id');
-            $table->foreign('chat_id')->references('id')->on('chats')->onDelete('cascade');
-            $table->unsignedBigInteger('sender_id');
-            $table->foreign('sender_id')->references('id')->on('students')->onDelete('cascade');
+            $table->unsignedBigInteger('student_id');
+            $table->string('title');
+            $table->string('photo');
             $table->text('content');
+            $table->boolean('status');
+            $table->integer('amount_money');
+            $table->integer('planning_money');
+
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -27,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('messages');
+        Schema::dropIfExists('skill_funds');
     }
 };
