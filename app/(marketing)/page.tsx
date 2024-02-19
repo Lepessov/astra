@@ -44,7 +44,7 @@ export interface QACard {
     created:string,
 }
 
-export const works: AdCard[] = [
+const works: AdCard[] = [
     {
       id:1,
       img: "https://avatars.mds.yandex.net/i?id=e1095d76245d2f6ef94f3309489c0c6ed78abf63-10619913-images-thumbs&n=13",
@@ -81,7 +81,7 @@ export const works: AdCard[] = [
       img: "https://avatars.mds.yandex.net/i?id=e1095d76245d2f6ef94f3309489c0c6ed78abf63-10619913-images-thumbs&n=13",
     },
   ]
-export const qaCards: QACard[] = [
+const qaCards: QACard[] = [
     {
         id: 1,
         avatar:"https://e7.pngegg.com/pngimages/349/288/png-clipart-teacher-education-student-course-school-avatar-child-face.png",
