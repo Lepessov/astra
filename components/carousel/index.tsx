@@ -5,55 +5,13 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 import CardItem from "../card"
 import { toast } from 'sonner'
 import { AlertTriangle } from "lucide-react";
+import { AdCard, QACard } from "@/app/(marketing)/page"
+import QACardItem from "../qaCard"
 
 
-export interface AdCard {
-    id:number,
-    img:string,
-    price:string,
-    title:string,
-    location:string,
-}
 
-export const works: AdCard[] = [
-  {
-    id:1,
-    img: "https://avatars.mds.yandex.net/i?id=e1095d76245d2f6ef94f3309489c0c6ed78abf63-10619913-images-thumbs&n=13",
-    price: "$1500 until project launch",
-    location: "Banff National Park, Alberta, Canada",
-    title: "Ornella Binni",
-  },
-  {
-    id:2,
-    price: "$1500 until project launch",
-    location: "Banff National Park, Alberta, Canada",
-    title: "Tom Byrom",
-    img: "https://avatars.mds.yandex.net/i?id=e1095d76245d2f6ef94f3309489c0c6ed78abf63-10619913-images-thumbs&n=13",
-  },
-  {
-    id:3,
-    price: "$1500 until project launch",
-    location: "Banff National Park, Alberta, Canada",
-    title: "Vladimir Malyavko",
-    img: "https://avatars.mds.yandex.net/i?id=e1095d76245d2f6ef94f3309489c0c6ed78abf63-10619913-images-thumbs&n=13",
-  },
-  {
-    id:4,
-    price: "$1500 until project launch",
-    location: "Banff National Park, Alberta, Canada",
-    title: "Vladimir Malyavko",
-    img: "https://avatars.mds.yandex.net/i?id=e1095d76245d2f6ef94f3309489c0c6ed78abf63-10619913-images-thumbs&n=13",
-  },
-  {
-    id:5,
-    price: "$1500 until project launch",
-    location: "Banff National Park, Alberta, Canada",
-    title: "Vladimir Malyavko",
-    img: "https://avatars.mds.yandex.net/i?id=e1095d76245d2f6ef94f3309489c0c6ed78abf63-10619913-images-thumbs&n=13",
-  },
-]
 
-const Carousel = () => {
+const Carousel = ({children} : {children:React.ReactNode}) => {
   const [showMore, setShowMore] = useState(false)
 
   const onEndScroll = () => {
@@ -93,9 +51,7 @@ const Carousel = () => {
      type="scroll"
     >
       <div  className="flex w-max ml-0 p-4 px-0 md:px-4">
-        {works.map((item) => (
-          <CardItem key={item.id} info={item} />
-        ))}
+        {children}
       </div>
       <ScrollBar orientation="horizontal" />
     </ScrollArea>

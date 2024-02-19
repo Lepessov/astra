@@ -2,11 +2,11 @@
 import * as React from "react";
 import Image from "next/image";
 import { useState } from "react"; // Import useState
-import { AdCard } from "../carousel";
 import { Bookmark, MapPin, Check, AlertTriangle } from "lucide-react";
 import { toast } from 'sonner'
+import { AdCard } from "@/app/(marketing)/page";
 
-const CardItem = ({ info }: { info: AdCard }) => {
+const CardItem = ({ info, cardColor }: { info:AdCard, cardColor:string }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [filled, setFilled] = useState("none");
 
@@ -30,7 +30,7 @@ const CardItem = ({ info }: { info: AdCard }) => {
   };
 
   return (
-    <div className="shadow-sm border hover:shadow-lg hover:px-3 transition- duration-200 text-black rounded-lg overflow-y-auto mx-7 ml-2 md:ml-7 p-2">
+    <div className={`shadow-sm border hover:shadow-lg hover:px-3 transition- duration-200 text-black rounded-lg overflow-y-auto mx-7 ml-2 md:ml-7 p-2 ${cardColor}`}>
       <div className="relative">
         <Image
           src={info.img}
