@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Search } from './search';
 import { Button } from "@/components/ui/button"
+import { MenuSquare } from "lucide-react"
 
 
 
@@ -32,7 +33,7 @@ export const Header = () => {
             </nav>:null}
             <Search/>
             {!isloggedIn?(
-                <div className='hidden lg:block'>
+                <div className='hidden md:block'>
                 <Button className='text-indigo-900 bg-white m-4 hover:text-white'>
                     sign in
                 </Button>
@@ -41,7 +42,7 @@ export const Header = () => {
                 </Button>
             </div>
             ):(<></>)}
-            
+            <MenuSquare className='h-8 w-8 md:hidden text-white'/>
         </header>
     );
 };

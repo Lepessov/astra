@@ -30,12 +30,12 @@ const CardItem = ({ info }: { info: AdCard }) => {
   };
 
   return (
-    <div className="shadow-sm border hover:shadow-lg hover:px-3 transition- duration-200 text-black rounded-lg overflow-y-auto mx-7 p-2">
+    <div className="shadow-sm border hover:shadow-lg hover:px-3 transition- duration-200 text-black rounded-lg overflow-y-auto mx-7 ml-2 md:ml-7 p-2">
       <div className="relative">
         <Image
           src={info.img}
           alt={`Photo by ${info.title}`}
-          className="w-fit object-cover rounded-lg"
+          className="w-fit object-cover rounded-lg min-w-80"
           width={300}
           height={188}
         />

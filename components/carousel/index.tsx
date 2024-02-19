@@ -90,8 +90,9 @@ const Carousel = () => {
     <ScrollArea
       className="w-full whitespace-nowrap rounded-md pb-6"
      scrollEvent={handleScroll}
+     type="scroll"
     >
-      <div  className="flex w-max ml-0 p-4">
+      <div  className="flex w-max ml-0 p-4 px-0 md:px-4">
         {works.map((item) => (
           <CardItem key={item.id} info={item} />
         ))}
