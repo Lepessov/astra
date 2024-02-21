@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState } from "react"; // Import useState
 import { Bookmark, MapPin, Check, AlertTriangle } from "lucide-react";
 import { toast } from 'sonner'
-import { AdCard } from "@/app/(marketing)/page";
+import { AdCard, QACard } from "@/app/(marketing)/page";
 
 const CardItem = ({ info, cardColor }: { info:AdCard, cardColor:string }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
