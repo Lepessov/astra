@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\StudentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,11 +15,11 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+Route::post('/login', [StudentController::class, 'login']);
+Route::post('/register', [StudentController::class, 'register']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/posts', [PostController::class, 'mainIndex']);
+    Route::get('/questions', [PostController::class, 'mainIndex']);
+    Route::get('/skill_funds', [PostController::class, 'mainIndex']);
 });
-
-Route::get('/posts', [PostController::class, 'mainIndex']);
-Route::get('/questions', [PostController::class, 'mainIndex']);
-Route::get('/skill_funds', [PostController::class, 'mainIndex']);

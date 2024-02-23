@@ -2,10 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Sanctum\HasApiTokens;
 
-class Student extends Model
+class Student extends Authenticatable
 {
+    use HasApiTokens;
+
     protected $fillable = [
         'name',
         'surname',
@@ -28,17 +32,5 @@ class Student extends Model
     public function applications()
     {
         return $this->hasMany(Application::class);
-    }
-
-    // Define the relationship with chats
-    public function chats()
-    {
-        return $this->hasMany(Chat::class);
-    }
-
-    // Define the relationship with messages
-    public function messages()
-    {
-        return $this->hasMany(Message::class);
     }
 }
