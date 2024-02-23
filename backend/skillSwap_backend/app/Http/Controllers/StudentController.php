@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StudentLoginRequest;
 use App\Http\Requests\StudentRegisterRequest;
 use App\Models\Student;
+use App\Services\StudentService;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
@@ -15,9 +16,11 @@ class StudentController extends Controller
 {
     use ApiResponse;
 
-    public function register(StudentRegisterRequest $request): JsonResponse
+    public function register(StudentRegisterRequest $request, StudentService $service): JsonResponse
     {
         $data = $request->validated();
+
+        $isStudent = $service->isCorporateEmail($data['email']);
 
         $student = new Student([
             'email' => $data['email'],
@@ -26,6 +29,7 @@ class StudentController extends Controller
             'name' => $data['name'],
             'surname' => $data['surname'],
             'password' => Hash::make($data['password']),
+            'is_student' => $isStudent,
         ]);
 
         $student->save();

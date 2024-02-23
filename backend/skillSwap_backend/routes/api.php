@@ -19,7 +19,10 @@ Route::post('/login', [StudentController::class, 'login']);
 Route::post('/register', [StudentController::class, 'register']);
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/posts', [PostController::class, 'mainIndex']);
-    Route::get('/questions', [PostController::class, 'mainIndex']);
+    Route::middleware('student.access')->group(function () {
+        Route::get('/posts', [PostController::class, 'mainIndex']);
+        Route::get('/questions', [PostController::class, 'mainIndex']);
+    });
+
     Route::get('/skill_funds', [PostController::class, 'mainIndex']);
 });
