@@ -1,9 +1,9 @@
 <?php
 
-namespace app\Http\Controllers;
+namespace App\Http\Controllers;
 
 use App\Models\Post;
-use app\Models\Question;
+use App\Models\Question;
 use App\Traits\ApiResponse;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 

@@ -2,13 +2,14 @@
 
 namespace App\Traits;
 
+use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 trait ApiResponse
 {
     public function successResponse(
         $data = null, $code = ResponseAlias::HTTP_OK, $message = ""
-    )
+    ): JsonResponse
     {
         return response()->json(
             [
@@ -26,7 +27,7 @@ trait ApiResponse
         $data = null,
         $code = ResponseAlias::HTTP_INTERNAL_SERVER_ERROR,
         $message = ""
-    )
+    ): JsonResponse
     {
         return response()->json(
             [

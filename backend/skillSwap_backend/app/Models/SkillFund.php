@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Models;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,6 +13,9 @@ class SkillFund extends Model
         'title',
         'photo',
         'status',
+        'content',
+        'planning_money',
+        'amount_money',
     ];
 
     public function categories()
