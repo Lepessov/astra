@@ -48,6 +48,18 @@ class StudentController extends Controller
         $student = Student::query()->where('email', $data['email'])->first();
         $token = $student->createToken('API TOKEN')->plainTextToken;
 
-        return $this->successResponse(data:['token' => $token], message: 'Logged in successfully!');
+        return $this->successResponse(data:[
+            'token' => $token,
+            'student_id' => $student->id,
+            'email' => $student->email,
+            'is_student' => $student->is_student,
+        ], message: 'Logged in successfully!');
+    }
+
+    public function logout(): JsonResponse
+    {
+        Auth::user()->tokens()->delete();
+
+        return $this->successResponse(message: 'Logged out successfully!');
     }
 }

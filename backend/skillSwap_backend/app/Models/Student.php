@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Sanctum\HasApiTokens;
@@ -20,16 +21,14 @@ class Student extends Authenticatable
         'photo',
         'course',
         'password',
-    ]; // Specify the fillable attributes
+    ];
 
-    // Define the relationship with posts
-    public function posts()
+    public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
     }
 
-    // Define the relationship with applications
-    public function applications()
+    public function applications(): HasMany
     {
         return $this->hasMany(Application::class);
     }
