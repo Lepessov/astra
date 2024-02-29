@@ -1,6 +1,6 @@
 // register.ts
 
-import { formSchema } from "@/app/(auth)/register/page";
+import { formSchema } from "@/data/mockdata";
 import { UserData, useUser } from "@/store/userContext";
 import { z } from "zod";
 
