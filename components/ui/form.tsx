@@ -78,7 +78,7 @@ const FormItem = React.forwardRef<
 
   return (
     <FormItemContext.Provider value={{ id }}>
-      <div ref={ref} className={cn("space-y-2", className)} {...props} />
+      <div ref={ref} className={cn("space-y-2 relative", className)} {...props} />
     </FormItemContext.Provider>
   )
 })
@@ -164,6 +164,20 @@ const FormMessage = React.forwardRef<
 })
 FormMessage.displayName = "FormMessage"
 
+const FormIcon = () => {
+  const { error } = useFormField()
+  const body = error
+
+  if (!body) {
+    return null
+  }
+  return(
+    <span className="absolute top-7 text-xl bottom-0 right-3">!</span>
+  )
+}
+
+
+
 export {
   useFormField,
   Form,
@@ -172,5 +186,6 @@ export {
   FormControl,
   FormDescription,
   FormMessage,
+  FormIcon,
   FormField,
 }

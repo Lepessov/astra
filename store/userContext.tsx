@@ -3,6 +3,8 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 
 // Define the shape of user data (you can adjust this based on your actual user data structure)
 export interface UserData {
+  name:string;
+  photo:string;
   token:string;
   student_id:number;
   email:string;

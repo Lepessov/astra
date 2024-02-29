@@ -67,10 +67,10 @@ const MarketingPage = () => {
     
   return (
     <div className="text-sky-500 pt-14 text-center">
-        <div className="flex items-center absolute top-12 left-5">
+        {/* <div className="flex items-center absolute top-12 left-5">
             <FilterButton options={options} type="Filter"/>
             <FilterButton options={options} type="Sort"/>
-        </div>
+        </div> */}
         <div>
             <h2 className="text-2xl text-black text-shadow mt-6">Crowd Funding</h2>
             <CrowdFundingCarousel/>

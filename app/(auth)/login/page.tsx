@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { loginUser } from "@/services/auth";
 import { useUser } from "@/store/userContext";
+import { redirect } from 'next/navigation';
 
 const formSchema = z
   .object({
@@ -39,6 +40,7 @@ const LoginPage: React.FC = () => {
       // Set the user data if login is successful
       setUser(loginResult.data);
       console.log("User logged in successfully:", loginResult);
+      redirect("/")
     } else {
       // Handle login error
       console.error("Login failed:", loginResult.error);
@@ -54,7 +56,7 @@ const LoginPage: React.FC = () => {
           onSubmit={form.handleSubmit(handleSubmit)}
           className="max-h-[650px] h-full flex flex-col justify-around"
         >
-          <div className="flex-col h-48 flex xl:flex-row xl:h-auto justify-between max-w-5xl w-[50vw] mx-auto">
+          <div className="flex-col h-48 flex justify-between max-w-5xl w-[50vw] mx-auto">
           <FormField
             control={form.control}
             name="email"
@@ -99,11 +101,11 @@ const LoginPage: React.FC = () => {
             LOGIN
           </Button>
 
-          <div className="flex-col h-48 my-7 flex xl:flex-row items-center xl:my-0 justify-between max-w-5xl w-[50vw] mx-auto">
+          <div className="flex-col h-48 my-7 flex items-center justify-between max-w-5xl w-[50vw] mx-auto">
           <Button  type="submit" className="max-w-72 mx-auto w-full window-sm bg-gray-300 text-black hover:bg-gray-400">
             REGISTER
           </Button>
-          <div className="border w-96 xl:w-0 xl:h-52 border-black"></div>
+          <div className="border w-96  border-black"></div>
           <Button  type="submit" className="max-w-72 mx-auto w-full window-sm bg-gray-300 text-black hover:bg-gray-400">
             FORGOT PASSWORD
           </Button>
