@@ -2,11 +2,11 @@
 import * as React from "react";
 import Image from "next/image";
 import { useState } from "react"; // Import useState
-import { Bookmark, MapPin, Check, AlertTriangle } from "lucide-react";
+import { Bookmark, MapPin, AlertTriangle } from "lucide-react";
 import { toast } from 'sonner'
-import { AdCard, QACard } from "@/app/(marketing)/page";
+import { SSCard } from "@/app/(marketing)/page";
 
-const CardItem = ({ info, cardColor }: { info:AdCard, cardColor:string }) => {
+const SSCardItem = ({ info, cardColor }: { info:SSCard, cardColor:string }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [filled, setFilled] = useState("none");
 
@@ -33,7 +33,7 @@ const CardItem = ({ info, cardColor }: { info:AdCard, cardColor:string }) => {
     <div className={`shadow-sm border hover:shadow-lg hover:px-3 transition- duration-200 text-black rounded-lg overflow-y-auto mx-7 ml-2 md:ml-7 p-2 ${cardColor}`}>
       <div className="relative">
         <Image
-          src={info.img}
+          src={info.photo}
           alt={`Photo by ${info.title}`}
           className="w-fit object-cover rounded-lg min-w-80"
           width={300}
@@ -49,12 +49,10 @@ const CardItem = ({ info, cardColor }: { info:AdCard, cardColor:string }) => {
       <h3 className="p-2 text-start">{info.title}</h3>
       <p className="flex items-end pb-2">
         <MapPin className="w-6 mb-1 mr-1" />
-        <span>{info.location}</span>
+        <span>{info.content}</span>
       </p>
-      
-
     </div>
   );
 };
 
-export default CardItem;
+export default SSCardItem;

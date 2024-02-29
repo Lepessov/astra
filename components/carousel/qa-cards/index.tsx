@@ -58,7 +58,7 @@ const QACarousel = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`https://api.example.com/skill_funds`)
+    fetch(`http://127.0.0.1:8000/api/questions`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Failed to fetch data');
@@ -66,7 +66,7 @@ const QACarousel = () => {
         return response.json();
       })
       .then((jsonData) => {
-        setData(jsonData);
+        setData(jsonData.data);
         setLoading(false);
       })
       .catch((error) => {

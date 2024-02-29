@@ -4,10 +4,13 @@ import { cn } from "@/lib/utils"
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {}
-
-const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, ...props }, ref) => {
+interface validateProps {
+  validation? : boolean
+}
+const Input = React.forwardRef<HTMLInputElement, InputProps & validateProps>(
+  ({ className, type, validation = true, ...props }, ref) => {
     return (
+      <>
       <input
         type={type}
         className={cn(
@@ -17,6 +20,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         ref={ref}
         {...props}
       />
+      {!validation && (<span>🚫</span>)}
+      </>
     )
   }
 )

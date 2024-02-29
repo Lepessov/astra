@@ -3,48 +3,82 @@ import * as React from "react"
 import { Skeleton } from "@/components/ui/skeleton"
 import {useState,useEffect} from "react"
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
-import CardItem from "../../card"
+import CFCardItem from "../../cf-card"
 import { toast } from 'sonner'
 import { AlertTriangle } from "lucide-react"
-import { AdCard } from "@/app/(marketing)/page"
+import { CFCard } from "@/app/(marketing)/page"
 
 
-
-const adCards: AdCard[] = [
+// id:number,
+//     student_id:number,
+//     title:string,
+//     photo:string,
+//     content:string,
+//     status:boolean,
+//     amount_money:number,
+//     planning_money:number,
+//     created_at:Date | null,
+//     updated_at:Date | null
+const CFCards: CFCard[] = [
   {
     id:1,
-    img: "https://avatars.mds.yandex.net/i?id=e1095d76245d2f6ef94f3309489c0c6ed78abf63-10619913-images-thumbs&n=13",
-    price: "$1500 until project launch",
-    location: "Banff National Park, Alberta, Canada",
+    student_id:1,
+    photo: "https://avatars.mds.yandex.net/i?id=e1095d76245d2f6ef94f3309489c0c6ed78abf63-10619913-images-thumbs&n=13",
+    content: "$1500 until project launch",
+    amount_money:1000,
+    planning_money:100000,
+    status: true,
     title: "Ornella Binni",
+    created_at:null,
+    updated_at:null
   },
   {
     id:2,
-    price: "$1500 until project launch",
-    location: "Banff National Park, Alberta, Canada",
+    student_id:1,
+    content: "$1500 until project launch",
+    amount_money:1000,
+    planning_money:100000,
+    status: true,
     title: "Tom Byrom",
-    img: "https://avatars.mds.yandex.net/i?id=e1095d76245d2f6ef94f3309489c0c6ed78abf63-10619913-images-thumbs&n=13",
+    photo: "https://avatars.mds.yandex.net/i?id=e1095d76245d2f6ef94f3309489c0c6ed78abf63-10619913-images-thumbs&n=13",
+    created_at:null,
+    updated_at:null
   },
   {
     id:3,
-    price: "$1500 until project launch",
-    location: "Banff National Park, Alberta, Canada",
+    student_id:1,
+    content: "$1500 until project launch",
+    amount_money:1000,
+    planning_money:100000,
+    status: true,
     title: "Vladimir Malyavko",
-    img: "https://avatars.mds.yandex.net/i?id=e1095d76245d2f6ef94f3309489c0c6ed78abf63-10619913-images-thumbs&n=13",
+    photo: "https://avatars.mds.yandex.net/i?id=e1095d76245d2f6ef94f3309489c0c6ed78abf63-10619913-images-thumbs&n=13",
+    created_at:null,
+    updated_at:null
   },
   {
     id:4,
-    price: "$1500 until project launch",
-    location: "Banff National Park, Alberta, Canada",
+    student_id:1,
+    content: "$1500 until project launch",
+    amount_money:1000,
+    planning_money:100000,
+    status: true,
     title: "Vladimir Malyavko",
-    img: "https://avatars.mds.yandex.net/i?id=e1095d76245d2f6ef94f3309489c0c6ed78abf63-10619913-images-thumbs&n=13",
+    photo: "https://avatars.mds.yandex.net/i?id=e1095d76245d2f6ef94f3309489c0c6ed78abf63-10619913-images-thumbs&n=13",
+    created_at:null,
+    updated_at:null
   },
   {
     id:5,
-    price: "$1500 until project launch",
-    location: "Banff National Park, Alberta, Canada",
+    student_id:1,
+    content: "$1500 until project launch",
+    amount_money:1000,
+    planning_money:100000,
+    status: true,
     title: "Vladimir Malyavko",
-    img: "https://avatars.mds.yandex.net/i?id=e1095d76245d2f6ef94f3309489c0c6ed78abf63-10619913-images-thumbs&n=13",
+    photo: "https://avatars.mds.yandex.net/i?id=e1095d76245d2f6ef94f3309489c0c6ed78abf63-10619913-images-thumbs&n=13",
+    created_at:null,
+    updated_at:null
   },
 ]
 // const qaCards: QACard[] = [
@@ -91,11 +125,11 @@ const adCards: AdCard[] = [
 // ];
 
 const CrowdFundingCarousel = () => {
-  const [data, setData] = useState<AdCard[]>([]);
+  const [data, setData] = useState<CFCard[]>([]);
   const [loading, setLoading] = useState(true);
 
 useEffect(() => {
-    fetch(`https://api.example.com/posts`)
+    fetch(`http://127.0.0.1:8000/api/posts`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Failed to fetch data');
@@ -103,11 +137,11 @@ useEffect(() => {
         return response.json();
       })
       .then((jsonData) => {
-        setData(jsonData);
+        setData(jsonData.data);
         setLoading(false);
       })
       .catch((error) => {
-        setData(adCards);
+        setData(CFCards);
         toast('Error', {
           description: error.message
         });
@@ -121,18 +155,41 @@ useEffect(() => {
       type="scroll"
     >
       <div  className="flex w-max ml-0 p-4 px-0 md:px-4">
-
-        {data.map((item) => !loading ? (
-          <CardItem key={item.id} cardColor={'bg-white'} info={item} />
-        ) : (
-            <div key={item.id} className="flex flex-col space-y-3 mx-6">
-      <Skeleton className="h-[185px] w-[400px] rounded-xl bg-neutral-300"/>
-      <div className="space-y-2">
-        <Skeleton className="h-6 w-[400px] bg-neutral-300" />
-        <Skeleton className="h-6 w-[320px] bg-neutral-300" />
-      </div>
-    </div>
-        ))}
+        {loading && (
+          <div className="flex">
+            <div className="flex flex-col space-y-3 mx-6">
+              <Skeleton className="h-[185px] w-[400px] rounded-xl bg-neutral-300"/>
+              <div className="space-y-2">
+                <Skeleton className="h-6 w-[400px] bg-neutral-300" />
+                <Skeleton className="h-6 w-[320px] bg-neutral-300" />
+              </div>
+            </div>
+            <div className="flex flex-col space-y-3 mx-6">
+              <Skeleton className="h-[185px] w-[400px] rounded-xl bg-neutral-300"/>
+              <div className="space-y-2">
+                <Skeleton className="h-6 w-[400px] bg-neutral-300" />
+                <Skeleton className="h-6 w-[320px] bg-neutral-300" />
+              </div>
+            </div>
+            <div className="flex flex-col space-y-3 mx-6">
+              <Skeleton className="h-[185px] w-[400px] rounded-xl bg-neutral-300"/>
+              <div className="space-y-2">
+                <Skeleton className="h-6 w-[400px] bg-neutral-300" />
+                <Skeleton className="h-6 w-[320px] bg-neutral-300" />
+              </div>
+            </div>
+            <div className="flex flex-col space-y-3 mx-6">
+              <Skeleton className="h-[185px] w-[400px] rounded-xl bg-neutral-300"/>
+              <div className="space-y-2">
+                <Skeleton className="h-6 w-[400px] bg-neutral-300" />
+                <Skeleton className="h-6 w-[320px] bg-neutral-300" />
+              </div>
+            </div>
+          </div>
+        )}
+        {data.map((item) => (
+          <CFCardItem key={item.id} cardColor={'bg-white'} info={item} />
+        ) )}
       </div>
       <ScrollBar orientation="horizontal" />
     </ScrollArea>

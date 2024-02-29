@@ -1,0 +1,49 @@
+.toggle_checkbox{
+  padding: 1rem;
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px; /* Increased width by 10px */
+  height: 30px; /* Increased height by 10px */
+}
+
+.switch input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 3.5px solid #BABACA;
+  transition: .4s;
+  border-radius: 30px; /* Increased border radius by 5px */
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 1px;
+  bottom: 1px;
+  background-color: #BABACA;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  border-color: #212153;
+}
+input:checked + .slider::before {
+  background-color: #212153;
+}
+
+input:checked + .slider:before {
+  transform: translateX(20px); /* Adjusted translation for increased width */
+}

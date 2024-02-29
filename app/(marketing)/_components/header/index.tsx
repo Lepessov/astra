@@ -34,12 +34,19 @@ export const Header = () => {
             <Search/>
             {!isloggedIn?(
                 <div className='hidden md:block'>
-                <Button className='text-indigo-900 bg-white m-4 hover:text-white'>
-                    sign in
-                </Button>
-                <Button className='bg-transparen'>
-                    sign up
-                </Button>
+                    <Link href="/login">
+                        <Button className='text-indigo-900 bg-white m-4 hover:text-white'>
+                            sign in
+                        </Button>
+                    </Link>
+                    <Link href="/register">
+                        <Button className='bg-transparen'>
+                            sign up
+                        </Button>
+                    </Link>
+                
+                
+                
             </div>
             ):(<></>)}
             <MenuSquare className='h-8 w-8 md:hidden text-white'/>

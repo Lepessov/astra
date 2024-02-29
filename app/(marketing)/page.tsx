@@ -29,12 +29,17 @@ const options = [
 ]
 
 
-export interface AdCard {
+export interface CFCard {
     id:number,
-    img:string,
-    price:string,
+    student_id:number,
     title:string,
-    location:string,
+    photo:string,
+    content:string,
+    status:boolean,
+    amount_money:number,
+    planning_money:number,
+    created_at:Date | null,
+    updated_at:Date | null
 }
 export interface QACard {
     id:number,
@@ -44,6 +49,18 @@ export interface QACard {
     description:string,
     created:string,
 }
+export interface SSCard {
+    id:number,
+    student_id:number,
+    title:string,
+    photo:string,
+    content:string,
+    status:boolean,
+    created_at:Date | null,
+    updated_at:Date | null
+}
+
+
 
 
 const MarketingPage = () => {
