@@ -13,7 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { loginUser } from "@/services/auth";
 import { useUser } from "@/store/userContext";
-import { redirect } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
 const formSchema = z
   .object({
@@ -34,17 +34,20 @@ const LoginPage: React.FC = () => {
 
   const {setUser} = useUser();
 
+  const router = useRouter()
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
     const loginResult = await loginUser(values);
     if (loginResult.success) {
       // Set the user data if login is successful
       setUser(loginResult.data);
       console.log("User logged in successfully:", loginResult);
-      redirect("/")
+      router.replace("/")
+
     } else {
       // Handle login error
       console.error("Login failed:", loginResult.error);
     }
+
   };
 
 

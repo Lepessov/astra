@@ -25,7 +25,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { useUser } from "@/store/userContext";
 import { registerUser } from "@/services/auth";
 import { formSchema } from "@/data/mockdata";
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 
 
@@ -74,13 +74,14 @@ const RegisterPage: React.FC = () => {
 
   const accountType = form.watch("accountType");
 
+  const router = useRouter()
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
     values.gender = selectedGender;
     const loginResult = await registerUser(values);
     if (loginResult.success) {
       // Set the user data if login is successful
       console.log("User logged in successfully:", loginResult);
-      redirect("/login")
+      router.replace("/login")
     } else {
       // Handle login error
       console.error("Login failed:", loginResult);

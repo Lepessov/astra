@@ -9,9 +9,9 @@ const Avatar = ({ info }: { info : {photo:string,name:string}}) => {
         <Image
           src={info.photo}
           alt={`Photo by ${info.name}`}
-          className="w-fit object-cover rounded-full pr-2"
-          width={35}
-          height={35}
+          className="rounded-full w-11 h-11 object-cover mr-2"
+          width={45}
+          height={45}
         />
         <span>{info.name}</span>
     </div>
