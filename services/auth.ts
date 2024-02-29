@@ -33,7 +33,7 @@ export async function registerUser(userData: z.infer<typeof formSchema>): Promis
 
 // Function to authenticate a user
 export async function loginUser(credentials: {
-    emailAddress: string;
+    email: string;
     password: string;
   }): Promise<{ success: boolean; data?: UserData|null; error?: string }> {
 

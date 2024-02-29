@@ -5,31 +5,18 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import {
-  SelectValue,
-  SelectTrigger,
-  SelectContent,
-  SelectItem,
-  Select,
-} from "@/components/ui/select";
-import ToggleCheckbox from "@/components/ui/toggle-checkbox";
-import CheckboxRadioGroup from "@/components/checkbox-radio-group";
-import { useState } from "react";
-import { Checkbox } from "@/components/ui/checkbox"
 import { loginUser } from "@/services/auth";
 import { useUser } from "@/store/userContext";
 
 const formSchema = z
   .object({
-    emailAddress: z.string().email(),
+    email: z.string().min(1),
     password: z.string().min(3)
   })
 
@@ -39,7 +26,7 @@ const LoginPage: React.FC = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      emailAddress: "",
+      email: "",
       password: ""
     },
   });
@@ -70,7 +57,7 @@ const LoginPage: React.FC = () => {
           <div className="flex-col h-48 flex xl:flex-row xl:h-auto justify-between max-w-5xl w-[50vw] mx-auto">
           <FormField
             control={form.control}
-            name="emailAddress"
+            name="email"
             render={({ field }) => {
               return (
                 <FormItem>
