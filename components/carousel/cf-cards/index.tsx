@@ -187,7 +187,7 @@ useEffect(() => {
             </div>
           </div>
         )}
-        {data.map((item) => (
+        {CFCards.map((item) => (
           <CFCardItem key={item.id} cardColor={'bg-white'} info={item} />
         ) )}
       </div>

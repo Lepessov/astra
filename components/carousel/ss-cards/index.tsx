@@ -136,7 +136,7 @@ const SkillSwapCarousel = () => {
       type="scroll"
     >
       <div  className="flex w-max ml-0 p-4 px-0 md:px-4">
-        {data.map((item) => !loading ? (
+        {SSCards.map((item) => !loading ? (
           <SSCardItem key={item.id} cardColor={'bg-white'} info={item} />
         ): (
           <div key={item.id} className="flex flex-col space-y-3 mx-6">

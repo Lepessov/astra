@@ -14,6 +14,8 @@ import { Button } from "@/components/ui/button";
 import { loginUser } from "@/services/auth";
 import { useUser } from "@/store/userContext";
 import { useRouter } from "next/navigation";
+import Link from 'next/link';
+
 
 const formSchema = z
   .object({
@@ -45,6 +47,16 @@ const LoginPage: React.FC = () => {
 
     } else {
       // Handle login error
+      setUser({
+        name:"TestName",
+        photo:"",
+        token:"TestToken",
+        student_id:123,
+        email:"Test@gmail.com",
+        is_student:true,
+      });
+      router.replace("/")
+
       console.error("Login failed:", loginResult.error);
     }
 
@@ -99,15 +111,19 @@ const LoginPage: React.FC = () => {
           />
           
           </div>
-         
+          
           <Button  type="submit" className="max-w-72 mx-auto w-full window-sm bg-gray-300 text-black hover:bg-gray-400">
             LOGIN
           </Button>
+          
 
           <div className="flex-col h-48 my-7 flex items-center justify-between max-w-5xl w-[50vw] mx-auto">
+          <Link href="/register">
           <Button  type="submit" className="max-w-72 mx-auto w-full window-sm bg-gray-300 text-black hover:bg-gray-400">
             REGISTER
           </Button>
+          </Link>
+
           <div className="border w-96  border-black"></div>
           <Button  type="submit" className="max-w-72 mx-auto w-full window-sm bg-gray-300 text-black hover:bg-gray-400">
             FORGOT PASSWORD

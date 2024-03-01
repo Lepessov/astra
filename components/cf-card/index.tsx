@@ -33,7 +33,7 @@ const CFCardItem = ({ info, cardColor }: { info:CFCard, cardColor:string }) => {
     <div className={`shadow-sm border hover:shadow-lg hover:px-3 transition- duration-200 text-black rounded-lg overflow-y-auto mx-7 ml-2 md:ml-7 p-2 ${cardColor}`}>
       <div className="relative">
         <Image
-          src={info.photo}
+          src={info.photo && "https://avatars.mds.yandex.net/i?id=e1095d76245d2f6ef94f3309489c0c6ed78abf63-10619913-images-thumbs&n=13"}
           alt={`Photo by ${info.title}`}
           className="w-fit object-cover rounded-lg min-w-80"
           width={300}
