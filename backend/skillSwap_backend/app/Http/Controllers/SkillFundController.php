@@ -16,7 +16,18 @@ class SkillFundController extends Controller
 
     public function mainIndex(): JsonResponse
     {
-        $posts = SkillFund::query()->latest()->take(5)->get();
+        $posts = SkillFund::query()
+            ->select('skill_funds.title',
+                'skill_funds.content',
+                'skill_funds.status',
+                'skill_funds.photo',
+                'skill_funds.created_at',
+                'students.name',
+                'students.surname')
+            ->join('students', 'skill_funds.student_id', '=', 'students.id')
+            ->latest()
+            ->take(5)
+            ->get();
 
         return $this->successResponse($posts, ResponseAlias::HTTP_OK, "success");
     }

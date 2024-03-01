@@ -53,6 +53,8 @@ class StudentController extends Controller
             'student_id' => $student->id,
             'email' => $student->email,
             'is_student' => $student->is_student,
+            'photo' => $student->photo ?? '',
+            'name' => $student->name,
         ], message: 'Logged in successfully!');
     }
 

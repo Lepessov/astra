@@ -15,7 +15,18 @@ class PostController extends Controller
 
     public function mainIndex(): JsonResponse
     {
-        $posts = Post::query()->latest()->take(5)->get();
+        $posts = Post::query()
+            ->select('posts.title',
+                'posts.content',
+                'posts.status',
+                'posts.photo',
+                'posts.created_at',
+                'students.name',
+                'students.surname')
+            ->join('students', 'posts.student_id', '=', 'students.id')
+            ->latest()
+            ->take(5)
+            ->get();
 
         return $this->successResponse($posts, ResponseAlias::HTTP_OK, "success");
     }
