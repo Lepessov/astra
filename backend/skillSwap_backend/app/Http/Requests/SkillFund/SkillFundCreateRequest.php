@@ -11,7 +11,7 @@ class SkillFundCreateRequest extends BaseRequest
         return [
             'student_id' => 'required|exists:students,id',
             'title' => 'required|string',
-            'photo' => 'required|string',
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'content' => 'required|min:3|max:1000',
             'status' => 'required|boolean',
             'amount_money' => 'required|integer',
@@ -35,6 +35,10 @@ class SkillFundCreateRequest extends BaseRequest
             'planning_money.required' => 'The planning_money field is required.',
             'amount_money.integer' => 'The amount_money must be integer.',
             'planning_money.integer' => 'The planning_money must be integer.',
+            'photo.required' => 'The photo is required.',
+            'photo.image' => 'The photo must be an image.',
+            'photo.mimes' => 'The photo must be a file of type: jpeg, png, jpg, gif.',
+            'photo.max' => 'The photo may not be greater than 2048 kilobytes.',
         ];
     }
 }

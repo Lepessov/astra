@@ -7,6 +7,7 @@ use App\Http\Requests\Posts\PostUpdateRequest;
 use App\Models\Post;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class PostController extends Controller
@@ -45,22 +46,35 @@ class PostController extends Controller
 
     public function create(PostCreateRequest $request): JsonResponse
     {
-        $data = $request->validated();
+        $validatedData = $request->validated();
 
-        $post = Post::query()->create($data);
+        if ($request->hasFile('photo')) {
+            $photoPath = $request->file('photo')->store('posts', 'public'); // Adjust folder and disk as needed
+            $validatedData['photo'] = $photoPath;
+        }
+
+        $post = Post::query()->create($validatedData);
 
         return $this->successResponse($post, ResponseAlias::HTTP_CREATED, "created");
     }
 
     public function update(PostUpdateRequest $request, int $id): JsonResponse
     {
-        $data = $request->validated();
+        $validatedData = $request->validated();
 
         $post = Post::query()->findOrFail($id);
 
-        $post->update($data);
+        if ($request->hasFile('photo')) {
+            $photoPath = $request->file('photo')->store('posts', 'public'); // Adjust folder and disk as needed
+            $validatedData['photo'] = $photoPath;
+            if ($post->photo) {
+                Storage::disk('public')->delete($post->photo);
+            }
+        }
 
-        return $this->successResponse($post, ResponseAlias::HTTP_OK, "updated");
+        $post->update($validatedData);
+
+        return $this->successResponse($post, ResponseAlias::HTTP_OK, 'updated');
     }
 
     public function delete(int $id): JsonResponse

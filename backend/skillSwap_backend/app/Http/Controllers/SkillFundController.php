@@ -8,6 +8,7 @@ use App\Models\Post;
 use App\Models\SkillFund;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class SkillFundController extends Controller
@@ -46,20 +47,33 @@ class SkillFundController extends Controller
 
     public function create(SkillFundCreateRequest $request): JsonResponse
     {
-        $data = $request->validated();
+        $validatedData = $request->validated();
 
-        $post = SkillFund::query()->create($data);
+        if ($request->hasFile('photo')) {
+            $photoPath = $request->file('photo')->store('crowdfunding', 'public'); // Adjust folder and disk as needed
+            $validatedData['photo'] = $photoPath;
+        }
+
+        $post = SkillFund::query()->create($validatedData);
 
         return $this->successResponse($post, ResponseAlias::HTTP_CREATED, "created");
     }
 
     public function update(SkillFundUpdateRequest $request, int $id): JsonResponse
     {
-        $data = $request->validated();
+        $validatedData = $request->validated();
 
         $skillFund = SkillFund::query()->findOrFail($id);
 
-        $skillFund->update($data);
+        if ($request->hasFile('photo')) {
+            $photoPath = $request->file('photo')->store('crowdfunding', 'public'); // Adjust folder and disk as needed
+            $validatedData['photo'] = $photoPath;
+            if ($skillFund->photo) {
+                Storage::disk('public')->delete($skillFund->photo);
+            }
+        }
+
+        $skillFund->update($validatedData);
 
         return $this->successResponse($skillFund, ResponseAlias::HTTP_OK, "updated");
     }
