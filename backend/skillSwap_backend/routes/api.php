@@ -26,17 +26,25 @@ Route::post('/register', [StudentController::class, 'register']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::middleware('student.access')->group(function () {
+        Route::get('/posts/search', [PostController::class, 'search']);
         Route::get('/posts/all', [PostController::class, 'index']);
         Route::post('/posts/create', [PostController::class, 'create']);
         Route::put('/posts/{id}/update', [PostController::class, 'update']);
         Route::delete('/posts/{post}/delete', [PostController::class, 'delete']);
 
+        Route::get('/questions/search', [QuestionController::class, 'search']);
+        Route::get('/questions/all', [QuestionController::class, 'index']);
+        Route::post('/questions/create', [QuestionController::class, 'create']);
+        Route::put('/questions/{id}/update', [QuestionController::class, 'update']);
+        Route::delete('/questions/{id}/delete', [QuestionController::class, 'delete']);
+
+        Route::post('/skill_funds/create', [SkillFundController::class, 'create']);
+        Route::put('/skill_funds/{id}/update', [SkillFundController::class, 'update']);
+        Route::delete('/skill_funds/{id}/delete', [SkillFundController::class, 'delete']);
     });
 
+    Route::get('/skill_funds/search', [SkillFundController::class, 'search']);
     Route::get('/skill_funds/all', [SkillFundController::class, 'index']);
-    Route::post('/skill_funds/create', [SkillFundController::class, 'create']);
-    Route::put('/skill_funds/{id}/update', [SkillFundController::class, 'update']);
-    Route::delete('/skill_funds/{id}/delete', [SkillFundController::class, 'delete']);
 
     Route::post('/logout', [StudentController::class, 'logout']);
 });

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Posts;
+namespace App\Http\Requests\Question;
 
 use App\Http\Requests\BaseRequest;
 
-class PostUpdateRequest extends BaseRequest
+class QuestionUpdateRequest extends BaseRequest
 {
     public function rules(): array
     {
@@ -12,7 +12,7 @@ class PostUpdateRequest extends BaseRequest
             'student_id' => 'exists:students,id',
             'title' => 'string',
             'photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust max size as needed
-            'content' => 'string',
+            'description' => 'string',
             'status' => 'boolean',
         ];
     }
@@ -30,7 +30,7 @@ class PostUpdateRequest extends BaseRequest
             'photo.image' => 'The photo must be an image.',
             'photo.mimes' => 'The photo must be a file of type: jpeg, png, jpg, gif.',
             'photo.max' => 'The photo may not be greater than 2048 kilobytes.',
-            'content.string' => 'The content must be a string.',
+            'description.string' => 'The content must be a string.',
             'status.boolean' => 'The status must be a boolean.',
         ];
     }

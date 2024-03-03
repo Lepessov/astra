@@ -7,12 +7,49 @@ use App\Http\Requests\Posts\PostUpdateRequest;
 use App\Models\Post;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class PostController extends Controller
 {
     use ApiResponse;
+
+    public function search(Request $request): array
+    {
+        $query = $request->input('query');
+        $categories = $request->input('categories', []);
+        $perPage = $request->input('limit', 10);
+
+        $postsQuery = Post::query();
+
+        if ($query) {
+            $postsQuery->where(function ($queryBuilder) use ($query) {
+                $queryBuilder->where('title', 'LIKE', "%$query%")
+                    ->orWhere('content', 'LIKE', "%$query%");
+            });
+        }
+
+        if (!empty($categories)) {
+            $postsQuery->whereHas('categories', function ($query) use ($categories) {
+                $query->whereIn('name', $categories);
+            });
+        }
+
+        $posts = $postsQuery->paginate($perPage);
+
+//        return $this->successResponse($posts, ResponseAlias::HTTP_OK, "success");
+
+        return [
+            'success' => true,
+            'data' => $posts->items(),
+            'current_page' => $posts->currentPage(),
+            'per_page' => $posts->perPage(),
+            'total' => $posts->total(),
+            'code' => ResponseAlias::HTTP_OK,
+            'message' => 'success'
+        ];
+    }
 
     public function mainIndex(): JsonResponse
     {
