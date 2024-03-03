@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\RatingController;
 use App\Http\Controllers\SkillFundController;
 use App\Http\Controllers\SpecialityController;
 use App\Http\Controllers\StudentController;
@@ -38,6 +39,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/questions/search', [QuestionController::class, 'search']);
         Route::get('/questions/all', [QuestionController::class, 'index']);
         Route::post('/questions/create', [QuestionController::class, 'create']);
+        Route::post('/questions/{id}/rate', [RatingController::class, 'rateQuestion']);
         Route::put('/questions/{id}/update', [QuestionController::class, 'update']);
         Route::delete('/questions/{id}/delete', [QuestionController::class, 'delete']);
 
