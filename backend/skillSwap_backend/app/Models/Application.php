@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Application extends Model
 {
-    protected $fillable = ['post_id', 'applicant_id'];
+    protected $fillable = ['post_id', 'student_id'];
 
     public function post()
     {
@@ -15,6 +15,6 @@ class Application extends Model
 
     public function applicant()
     {
-        return $this->belongsTo(Student::class, 'applicant_id');
+        return $this->belongsTo(Student::class, 'student_id');
     }
 }

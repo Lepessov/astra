@@ -31,13 +31,14 @@ class Post extends Model
         return $this->belongsTo(Student::class);
     }
 
-    public function applications(): HasMany
-    {
-        return $this->hasMany(Application::class);
-    }
-
     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class, 'posts_categories');
+    }
+
+    public function applicants(): BelongsToMany
+    {
+        return $this->belongsToMany(Student::class, 'applications', 'post_id', 'student_id')
+            ->withTimestamps();
     }
 }

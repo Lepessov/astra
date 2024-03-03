@@ -28,7 +28,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::middleware('student.access')->group(function () {
         Route::get('/posts/search', [PostController::class, 'search']);
         Route::get('/posts/all', [PostController::class, 'index']);
+        Route::get('/posts/applied-posts', [PostController::class, 'getAppliedPosts']);
+        Route::get('/posts/{postId}/applicants', [PostController::class, 'getApplicantsForPost']);
         Route::post('/posts/create', [PostController::class, 'create']);
+        Route::post('/posts/{post}/apply', [PostController::class, 'applyForPost']);
         Route::put('/posts/{id}/update', [PostController::class, 'update']);
         Route::delete('/posts/{post}/delete', [PostController::class, 'delete']);
 

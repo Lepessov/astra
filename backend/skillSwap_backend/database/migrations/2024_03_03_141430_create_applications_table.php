@@ -8,21 +8,26 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
     public function up(): void
     {
         Schema::create('applications', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedBigInteger('post_id');
-            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
-            $table->unsignedBigInteger('applicant_id');
-            $table->foreign('applicant_id')->references('id')->on('students')->onDelete('cascade');
+            $table->id();
+            $table->foreignId('student_id')->constrained('students')->onDelete('cascade');
+            $table->foreignId('post_id')->constrained('posts')->onDelete('cascade');
             $table->timestamps();
+
+            // Add any additional columns specific to your application
+            // For example, you might want to store additional information about the application.
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
     public function down(): void
     {

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -28,8 +29,9 @@ class Student extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
-    public function applications(): HasMany
+    public function appliedPosts(): BelongsToMany
     {
-        return $this->hasMany(Application::class);
+        return $this->belongsToMany(Post::class, 'applications', 'student_id', 'post_id')
+            ->withTimestamps();
     }
 }

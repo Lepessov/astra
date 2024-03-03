@@ -8,6 +8,7 @@ use App\Models\Post;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
@@ -119,5 +120,48 @@ class PostController extends Controller
         Post::query()->findOrFail($id)->delete();
 
         return $this->successResponse(message:"deleted");
+    }
+
+    public function applyForPost(Request $request, $postId): JsonResponse
+    {
+        $student = Auth::user();
+
+        $post = Post::query()->findOrFail($postId);
+
+        if ($post->student_id === $student->id) {
+            return $this->errorResponse(code: ResponseAlias::HTTP_UNPROCESSABLE_ENTITY, message: 'Вы не можете откликнуться!');
+        }
+
+        if ($post->applicants()->where('student_id', $student->id)->exists()) {
+            return $this->errorResponse(code: ResponseAlias::HTTP_UNPROCESSABLE_ENTITY, message: 'Вы уже откликались!');
+        }
+
+        $post->applicants()->attach($student->id);
+
+        return $this->successResponse(message: 'Вы откликнулись!');
+    }
+
+    public function getAppliedPosts(): JsonResponse
+    {
+        $student = Auth::user();
+
+        $appliedPosts = $student->appliedPosts()->get();
+
+        return $this->successResponse($appliedPosts, message: 'success');
+    }
+
+    public function getApplicantsForPost(int $id): JsonResponse
+    {
+        $student = Auth::user();
+
+        $post = Post::query()->findOrFail($id);
+
+        if ($post->student_id !== $student->id) {
+            return $this->errorResponse(code: ResponseAlias::HTTP_FORBIDDEN, message: 'Доступ зпрещен!');
+        }
+
+        $applicants = $post->applicants()->get();
+
+        return $this->successResponse($applicants, message: 'success');
     }
 }
