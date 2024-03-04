@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StudentLoginRequest;
 use App\Http\Requests\StudentRegisterRequest;
+use App\Http\Requests\StudentUpdateRequest;
 use App\Models\Student;
 use App\Services\StudentService;
 use App\Traits\ApiResponse;
@@ -63,5 +64,23 @@ class StudentController extends Controller
         Auth::user()->tokens()->delete();
 
         return $this->successResponse(message: 'Logged out successfully!');
+    }
+
+    public function show(): JsonResponse
+    {
+        $student = Auth::user();
+
+        return $this->successResponse($student);
+    }
+
+    public function update(StudentUpdateRequest $request): JsonResponse
+    {
+        $student = Auth::user();
+
+        $validatedData = $request->validated();
+
+        $student->update($validatedData);
+
+        return $this->successResponse(data: $student, message: 'Профиль успешно изменен!');
     }
 }

@@ -58,6 +58,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/skill_funds/search', [SkillFundController::class, 'search']);
     Route::get('/skill_funds/all', [SkillFundController::class, 'index']);
 
+    Route::get('/student/profile', [StudentController::class, 'show']);
+    Route::put('/student/profile/update', [StudentController::class, 'update']);
+
     Route::post('/logout', [StudentController::class, 'logout']);
 });
 
