@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\PostController;
@@ -42,6 +43,12 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/questions/{id}/rate', [RatingController::class, 'rateQuestion']);
         Route::put('/questions/{id}/update', [QuestionController::class, 'update']);
         Route::delete('/questions/{id}/delete', [QuestionController::class, 'delete']);
+
+        Route::post('/questions/{question}/answers', [AnswerController::class, 'store']);
+        Route::get('/questions/{question}/answers', [AnswerController::class, 'index']);
+        Route::get('/answers/{answer}', [AnswerController::class, 'show']);
+        Route::put('/answers/{answer}', [AnswerController::class, 'update']);
+        Route::delete('/answers/{answer}', [AnswerController::class, 'delete']);
 
         Route::post('/skill_funds/create', [SkillFundController::class, 'create']);
         Route::put('/skill_funds/{id}/update', [SkillFundController::class, 'update']);
