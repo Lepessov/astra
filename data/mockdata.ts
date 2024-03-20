@@ -1,79 +1,171 @@
-import * as z from "zod";
+import { CFCard, QACard, SSCard } from "@/app/(working)/page";
 
-export const formSchema = z
-  .object({
-    name: z.string().min(1),
-    lastname: z.string().min(1),
-    university:z.string().optional(),
-    course:z.string().optional(),
-    faculty:z.string().optional(),
-    speciality:z.string().optional(),
-    emailAddress: z.string().email(),
-    password: z.string().min(3),
-    passwordConfirm: z.string(),
-    accountType: z.enum(["student", "user"]),
-    gender: z.enum(["Male","Female","Other"]),
-    agreement: z.boolean().default(false).optional(),
-    contact_number:z.string().min(1),
-  })
-  .refine(
-    (data) => {
-      return data.password === data.passwordConfirm;
-    },
-    {
-      message: "Passwords do not match",
-      path: ["passwordConfirm"],
-    }
-  )
-  .refine(
-    (data) => {
-      if (data.accountType === "student") {
-        return !!data.university;
-      }
-      data.university = ""
-      return true;
-    },
-    {
-      message: "Enter your university",
-      path: ["university"],
-    }
-  )
-  .refine(
-    (data) => {
-      if (data.accountType === "student") {
-        return !!data.course;
-      }
-      data.course = ""
-      return true;
-    },
-    {
-      message: "Enter your course",
-      path: ["course"],
-    }
-  )
-  .refine(
-    (data) => {
-      if (data.accountType === "student") {
-        return !!data.faculty;
-      }
-      data.faculty="" 
-      return true;
-    },
-    {
-      message: "Enter your faculty",
-      path: ["faculty"],
-    }
-  )
-  .refine(
-    (data) => {
-      if (data.accountType === "student") {  
-        return !!data.speciality;
-      }
-      data.speciality="" 
-      return true;
-    },
-    {
-      message: "Enter your speciality",
-      path: ["speciality"],
-    }
-  );
+const croudFundingCards: CFCard[] = [
+  {
+    id:1,
+    student_id:1,
+    photo: "https://avatars.mds.yandex.net/i?id=e1095d76245d2f6ef94f3309489c0c6ed78abf63-10619913-images-thumbs&n=13",
+    content: "$1500 until project launch",
+    amount_money:1000,
+    planning_money:100000,
+    status: true,
+    title: "Ornella Binni",
+    created_at:"null",
+    updated_at:"null"
+  },
+  {
+    id:2,
+    student_id:1,
+    content: "$1500 until project launch",
+    amount_money:1000,
+    planning_money:100000,
+    status: true,
+    title: "Tom Byrom",
+    photo: "https://avatars.mds.yandex.net/i?id=e1095d76245d2f6ef94f3309489c0c6ed78abf63-10619913-images-thumbs&n=13",
+    created_at:"null",
+    updated_at:"null"
+  },
+  {
+    id:3,
+    student_id:1,
+    content: "$1500 until project launch",
+    amount_money:1000,
+    planning_money:100000,
+    status: true,
+    title: "Vladimir Malyavko",
+    photo: "https://avatars.mds.yandex.net/i?id=e1095d76245d2f6ef94f3309489c0c6ed78abf63-10619913-images-thumbs&n=13",
+    created_at:"null",
+    updated_at:"null"
+  },
+  {
+    id:4,
+    student_id:1,
+    content: "$1500 until project launch",
+    amount_money:1000,
+    planning_money:100000,
+    status: true,
+    title: "Vladimir Malyavko",
+    photo: "https://avatars.mds.yandex.net/i?id=e1095d76245d2f6ef94f3309489c0c6ed78abf63-10619913-images-thumbs&n=13",
+    created_at:"null",
+    updated_at:"null"
+  },
+  {
+    id:5,
+    student_id:1,
+    content: "$1500 until project launch",
+    amount_money:1000,
+    planning_money:100000,
+    status: true,
+    title: "Vladimir Malyavko",
+    photo: "https://avatars.mds.yandex.net/i?id=e1095d76245d2f6ef94f3309489c0c6ed78abf63-10619913-images-thumbs&n=13",
+    created_at:"null",
+    updated_at:"null"
+  },
+]
+
+
+const qaCards: QACard[] = [
+  {
+      id: 1,
+      avatar:"https://e7.pngegg.com/pngimages/349/288/png-clipart-teacher-education-student-course-school-avatar-child-face.png",
+      author: "Alice",
+      title: "What is the capital of France?",
+      description: "I need to know the capital of France for my geography quiz.",
+      created: "8:59 PM Feb 18,2024"
+  },
+  {
+      id: 2,
+      avatar:"https://e7.pngegg.com/pngimages/349/288/png-clipart-teacher-education-student-course-school-avatar-child-face.png",
+      author: "Bob",
+      title: "How does photosynthesis work?",
+      description: "I'm studying biology and I'm curious about the process of photosynthesis.",
+      created: "8:59 PM Feb 18,2024"
+  },
+  {
+      id: 3,
+      avatar:"https://e7.pngegg.com/pngimages/349/288/png-clipart-teacher-education-student-course-school-avatar-child-face.png",
+      author: "Charlie",
+      title: "What is the main function of the liver?",
+      description: "I'm studying anatomy and I need to understand the role of the liver in the human body.",
+      created: "8:59 PM Feb 18,2024"
+  },
+  {
+      id: 4,
+      avatar:"https://e7.pngegg.com/pngimages/349/288/png-clipart-teacher-education-student-course-school-avatar-child-face.png",
+      author: "David",
+      title: "What are some common programming languages?",
+      description: "I'm new to programming and I want to know which languages are commonly used.",
+      created: "8:59 PM Feb 18,2024"
+  },
+  {
+      id: 5,
+      avatar:"https://e7.pngegg.com/pngimages/349/288/png-clipart-teacher-education-student-course-school-avatar-child-face.png",
+      author: "Eve",
+      title: "How does the stock market work?",
+      description: "I want to start investing in stocks but I'm not sure how the stock market operates.",
+      created: "8:59 PM Feb 18,2024"
+  }
+];
+
+
+const skillSwapCards: SSCard[] = [
+  {
+    id:1,
+    student_id:1,
+    photo: "https://avatars.mds.yandex.net/i?id=e1095d76245d2f6ef94f3309489c0c6ed78abf63-10619913-images-thumbs&n=13",
+    content: "$1500 until project launch",
+    status: true,
+    title: "Ornella Binni",
+    created_at:"null",
+    updated_at:"null"
+  },
+  {
+    id:2,
+    student_id:1,
+    content: "$1500 until project launch",
+    status: true,
+    title: "Tom Byrom",
+    photo: "https://avatars.mds.yandex.net/i?id=e1095d76245d2f6ef94f3309489c0c6ed78abf63-10619913-images-thumbs&n=13",
+    created_at:"null",
+    updated_at:"null"
+  },
+  {
+    id:3,
+    student_id:1,
+    content: "$1500 until project launch",
+    status: true,
+    title: "Vladimir Malyavko",
+    photo: "https://avatars.mds.yandex.net/i?id=e1095d76245d2f6ef94f3309489c0c6ed78abf63-10619913-images-thumbs&n=13",
+    created_at:"null",
+    updated_at:"null"
+  },
+  {
+    id:4,
+    student_id:1,
+    content: "$1500 until project launch",
+    status: true,
+    title: "Vladimir Malyavko",
+    photo: "https://avatars.mds.yandex.net/i?id=e1095d76245d2f6ef94f3309489c0c6ed78abf63-10619913-images-thumbs&n=13",
+    created_at:"null",
+    updated_at:"null"
+  },
+  {
+    id:5,
+    student_id:1,
+    content: "$1500 until project launch",
+    status: true,
+    title: "Vladimir Malyavko",
+    photo: "https://avatars.mds.yandex.net/i?id=e1095d76245d2f6ef94f3309489c0c6ed78abf63-10619913-images-thumbs&n=13",
+    created_at:"null",
+    updated_at:"null"
+  },
+]
+
+
+
+
+export {
+  croudFundingCards,
+  qaCards,
+  skillSwapCards
+}

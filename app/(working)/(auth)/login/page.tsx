@@ -15,19 +15,14 @@ import { loginUser } from "@/services/auth";
 import { useUser } from "@/store/userContext";
 import { useRouter } from "next/navigation";
 import Link from 'next/link';
+import { formSchemaLogin } from "@/form-schema";
 
-
-const formSchema = z
-  .object({
-    email: z.string().min(1),
-    password: z.string().min(3)
-  })
 
 
 
 const LoginPage: React.FC = () => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof formSchemaLogin>>({
+    resolver: zodResolver(formSchemaLogin),
     defaultValues: {
       email: "",
       password: ""
@@ -35,18 +30,15 @@ const LoginPage: React.FC = () => {
   });
 
   const {setUser} = useUser();
-
   const router = useRouter()
-  const handleSubmit = async (values: z.infer<typeof formSchema>) => {
+  const handleSubmit = async (values: z.infer<typeof formSchemaLogin>) => {
     const loginResult = await loginUser(values);
     if (loginResult.success) {
-      // Set the user data if login is successful
       setUser(loginResult.data);
       console.log("User logged in successfully:", loginResult);
       router.replace("/")
 
     } else {
-      // Handle login error
       setUser({
         name:"TestName",
         photo:"",
@@ -56,33 +48,30 @@ const LoginPage: React.FC = () => {
         is_student:true,
       });
       router.replace("/")
-
       console.error("Login failed:", loginResult.error);
     }
-
   };
 
 
   return (
-    <main className="h-screen lg:px-20">
-      <h1 className="text-7xl text-center m-0">Log In</h1>
+    <main className="lg:px-20 flex flex-col h-screen justify-center items-center">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(handleSubmit)}
-          className="max-h-[650px] h-full flex flex-col justify-around"
+          className=" flex flex-col h-48 mb-16 justify-around"
         >
-          <div className="flex-col h-48 flex justify-between max-w-5xl w-[50vw] mx-auto">
+          <div className="flex-col flex h-28 justify-between max-w-5xl w-[50vw] mx-auto">
+            
           <FormField
             control={form.control}
             name="email"
             render={({ field }) => {
               return (
                 <FormItem>
-                  <FormLabel>CORPORATIVE EMAIL ADDRESS</FormLabel>
                   <FormControl>
                     <Input
-                      className="focus-visible:ring-0 focus-visible:ring-transparent rounded-none focus-visible:ring-offset-0 border-transparent border-b-zinc-500 text-black"
-                      placeholder="Email address"
+                    className="w-full bg-[#F2F5FF] border-none focus-visible:ring-0 focus-visible:ring-transparent  focus-visible:ring-offset-0   text-black"
+                    placeholder="E-mail"
                       type="email"
                       {...field}
                     />
@@ -97,10 +86,9 @@ const LoginPage: React.FC = () => {
             render={({ field }) => {
               return (
                 <FormItem>
-                  <FormLabel>ENTER PASSWORD</FormLabel>
                   <FormControl>
                     <Input
-                    className="focus-visible:ring-0 focus-visible:ring-transparent rounded-none focus-visible:ring-offset-0 border-transparent border-b-zinc-500 text-black"
+                    className="w-full bg-[#F2F5FF] border-none focus-visible:ring-0 focus-visible:ring-transparent  focus-visible:ring-offset-0   text-black"
                     placeholder="Password"
                     type="password" {...field}
                     />
@@ -112,23 +100,11 @@ const LoginPage: React.FC = () => {
           
           </div>
           
-          <Button  type="submit" className="max-w-72 mx-auto w-full window-sm bg-gray-300 text-black hover:bg-gray-400">
+          <Button  type="submit" className=" max-w-96 mx-auto w-full window-sm bg-[#212153] rounded-full text-white hover:bg-gray-400">
             LOGIN
           </Button>
+
           
-
-          <div className="flex-col h-48 my-7 flex items-center justify-between max-w-5xl w-[50vw] mx-auto">
-          <Link href="/register">
-          <Button  type="submit" className="max-w-72 mx-auto w-full window-sm bg-gray-300 text-black hover:bg-gray-400">
-            REGISTER
-          </Button>
-          </Link>
-
-          <div className="border w-96  border-black"></div>
-          <Button  type="submit" className="max-w-72 mx-auto w-full window-sm bg-gray-300 text-black hover:bg-gray-400">
-            FORGOT PASSWORD
-          </Button>
-          </div>
         </form>
       </Form>
     </main>

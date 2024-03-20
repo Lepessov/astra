@@ -30,26 +30,26 @@ const CFCardItem = ({ info, cardColor }: { info:CFCard, cardColor:string }) => {
   };
 
   return (
-    <div className={`shadow-sm border hover:shadow-lg hover:px-3 transition- duration-200 text-black rounded-lg overflow-y-auto mx-7 ml-2 md:ml-7 p-2 ${cardColor}`}>
+    <div className={` w-[90vw] sm:w-96 mx-5 shadow-sm border hover:shadow-lg hover:px-3 transition duration-200 text-black rounded-lg overflow-y-auto sm:mx-7  md:ml-7 p-2  ${cardColor}`}>
       <div className="relative">
         <Image
           src={info.photo && "https://avatars.mds.yandex.net/i?id=e1095d76245d2f6ef94f3309489c0c6ed78abf63-10619913-images-thumbs&n=13"}
           alt={`Photo by ${info.title}`}
-          className="w-fit object-cover rounded-lg min-w-80"
-          width={300}
+          className="w-full object-cover rounded-lg"
+          width={200}
           height={188}
         />
         <div
-          className={"absolute top-2 right-2 p-3 cursor-pointer rounded-xl transition duration-300 bg-black bg-opacity-30"}
+          className={"absolute top-2 right-2 p-2 sm:p-3 cursor-pointer rounded-xl transition duration-300 bg-black bg-opacity-30"}
           onClick={handleBookmarkClick}
         >
-          <Bookmark className={`text-white transition-all duration-500 ${filled=="white"&&"scale-125"}`} fill={filled} />
+          <Bookmark className={`text-white w-5 sm:w-7 transition-all duration-500 ${filled=="white"&&"scale-125"}`} fill={filled} />
         </div>
       </div>
       <h3 className="p-2 text-start">{info.title}</h3>
-      <p className="flex items-end pb-2">
-        <MapPin className="w-6 mb-1 mr-1" />
-        <span>{info.content}</span>
+      <p className="flex items-center">
+        <MapPin className="w-5 sm:w-6 mb-1 mr-1" />
+        <span className="">{info.content}</span>
       </p>
       
 

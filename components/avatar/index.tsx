@@ -37,8 +37,10 @@ import {
     DropdownMenuShortcut,
     DropdownMenuTrigger,
   } from "@/components/ui/dropdown-menu"
+import { useUser } from "@/store/userContext";
   
   const  Avatar = ({ info }: { info : {photo:string,name:string}}) => {
+    const {setUser} = useUser();
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
@@ -69,7 +71,7 @@ import {
             </DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={()=>{console.log("logging out")}}>
+          <DropdownMenuItem onClick={()=>{setUser(null)}}>
             <LogOut  className="mr-2 h-4 w-4" />
             <span>Log out</span>
             <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>

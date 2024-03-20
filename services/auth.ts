@@ -1,14 +1,18 @@
 // register.ts
 
-import { formSchema } from "@/data/mockdata";
+import { CFCard, QACard, SSCard } from "@/app/(working)/page";
+import { formSchemaRegistration } from "@/form-schema";
 import { UserData, useUser } from "@/store/userContext";
 import { z } from "zod";
+import axios, { AxiosResponse } from 'axios';
 
 // Function to register a new user
 
-export async function registerUser(userData: z.infer<typeof formSchema>): Promise<{ success: boolean; message: string }> {
+const apiURL = "http://127.0.0.1:8000"
+
+export async function registerUser(userData: z.infer<typeof formSchemaRegistration>): Promise<{ success: boolean; message: string }> {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/register', {
+      const response = await fetch(`${apiURL}/api/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -27,18 +31,13 @@ export async function registerUser(userData: z.infer<typeof formSchema>): Promis
       return { success: false, message: 'An error occurred during registration.' };
     }
   }
-
-  
-  // login.ts
-
-// Function to authenticate a user
 export async function loginUser(credentials: {
     email: string;
     password: string;
   }): Promise<{ success: boolean; data?: UserData|null; error?: string }> {
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/login', {
+      const response = await fetch(`${apiURL}/api/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -59,3 +58,68 @@ export async function loginUser(credentials: {
     }
   }
   
+async function getFiveCroudFunding(): Promise<AxiosResponse<CFCard[]>> {
+  try {
+    const res = await axios.get<CFCard[]>(`${apiURL}/api/posts`);
+    return res;
+  } catch (error) {
+    throw new Error((error as Error).message);
+  }
+}
+async function getFiveSkillSwap(): Promise<AxiosResponse<SSCard[]>> {
+  try {
+    const res = await axios.get<SSCard[]>(`${apiURL}/api/skill_funds`);
+    return res;
+  } catch (error) {
+    throw new Error((error as Error).message);
+  }
+}
+async function getFiveQA(): Promise<AxiosResponse<QACard[]>> {
+  try {
+    const res = await axios.get<QACard[]>(`${apiURL}/api/questions`);
+    return res;
+  } catch (error) {
+    throw new Error((error as Error).message);
+  }
+}
+
+export interface FormSelectData {
+  id: number;
+  name: string;
+  value: string;
+}
+
+export interface RegisterFormData{
+  speciality: FormSelectData[];
+  faculty: FormSelectData[];
+  university: FormSelectData[];
+}
+
+async function getRegisterForm(): Promise<RegisterFormData> {
+  try {
+    const [specialityResponse, facultyResponse, universityResponse] = await Promise.all([
+      axios.get<FormSelectData[]>(`${apiURL}/api/frontend/student/specialities`),
+      axios.get<FormSelectData[]>(`${apiURL}/api/frontend/student/faculties`),
+      axios.get<FormSelectData[]>(`${apiURL}api/frontend/student/universities`)
+    ]);
+
+    const speciality = specialityResponse.data;
+    const faculty = facultyResponse.data;
+    const university = universityResponse.data;
+
+    return {speciality:speciality,faculty:faculty, university:university};
+  } catch (error) {
+    throw new Error((error as Error).message);
+  }
+}
+
+
+
+
+
+export {
+  getFiveCroudFunding,
+  getFiveQA,
+  getFiveSkillSwap,
+  getRegisterForm
+}

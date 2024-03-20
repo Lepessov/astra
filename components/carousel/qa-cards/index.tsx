@@ -7,64 +7,17 @@ import { AlertTriangle } from "lucide-react"
 import { QACard } from "@/app/(marketing)/page"
 import QACardItem from "@/components/qaCard"
 import { toast } from 'sonner'
+import { qaCards } from "@/data/mockdata"
+import { getFiveQA } from "@/services/auth"
 
 
-
-const qaCards: QACard[] = [
-  {
-      id: 1,
-      avatar:"https://e7.pngegg.com/pngimages/349/288/png-clipart-teacher-education-student-course-school-avatar-child-face.png",
-      author: "Alice",
-      title: "What is the capital of France?",
-      description: "I need to know the capital of France for my geography quiz.",
-      created: "8:59 PM Feb 18,2024"
-  },
-  {
-      id: 2,
-      avatar:"https://e7.pngegg.com/pngimages/349/288/png-clipart-teacher-education-student-course-school-avatar-child-face.png",
-      author: "Bob",
-      title: "How does photosynthesis work?",
-      description: "I'm studying biology and I'm curious about the process of photosynthesis.",
-      created: "8:59 PM Feb 18,2024"
-  },
-  {
-      id: 3,
-      avatar:"https://e7.pngegg.com/pngimages/349/288/png-clipart-teacher-education-student-course-school-avatar-child-face.png",
-      author: "Charlie",
-      title: "What is the main function of the liver?",
-      description: "I'm studying anatomy and I need to understand the role of the liver in the human body.",
-      created: "8:59 PM Feb 18,2024"
-  },
-  {
-      id: 4,
-      avatar:"https://e7.pngegg.com/pngimages/349/288/png-clipart-teacher-education-student-course-school-avatar-child-face.png",
-      author: "David",
-      title: "What are some common programming languages?",
-      description: "I'm new to programming and I want to know which languages are commonly used.",
-      created: "8:59 PM Feb 18,2024"
-  },
-  {
-      id: 5,
-      avatar:"https://e7.pngegg.com/pngimages/349/288/png-clipart-teacher-education-student-course-school-avatar-child-face.png",
-      author: "Eve",
-      title: "How does the stock market work?",
-      description: "I want to start investing in stocks but I'm not sure how the stock market operates.",
-      created: "8:59 PM Feb 18,2024"
-  }
-];
 
 const QACarousel = () => {
   const [data, setData] = useState<(QACard)[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/api/questions`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Failed to fetch data');
-        }
-        return response.json();
-      })
+    getFiveQA()
       .then((jsonData) => {
         setData(jsonData.data);
         setLoading(false);
@@ -84,8 +37,8 @@ const QACarousel = () => {
       className="w-full whitespace-nowrap rounded-md pb-6 md:min-h-96"
       type="scroll"
     >
-      <div  className="flex w-max ml-0 p-4 px-0 md:px-4">
-        {data.map((item) => !loading ? (
+      <div  className="flex w-max ml-0 p-4 px-0 md:px-4 text-sm sm:text-lg">
+        {qaCards.map((item) => !loading ? (
             <div key={item.id} className="flex">
           <QACardItem cardColor={'bg-white'} info={item} />
 

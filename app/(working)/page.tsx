@@ -32,14 +32,14 @@ const options = [
 export interface CFCard {
     id:number,
     student_id:number,
-    title:string,
     photo:string,
     content:string,
-    status:boolean,
     amount_money:number,
     planning_money:number,
-    created_at:Date | null,
-    updated_at:Date | null
+    status:boolean,
+    title:string,
+    created_at:string,
+    updated_at:string
 }
 export interface QACard {
     id:number,
@@ -52,12 +52,12 @@ export interface QACard {
 export interface SSCard {
     id:number,
     student_id:number,
-    title:string,
     photo:string,
     content:string,
     status:boolean,
-    created_at:Date | null,
-    updated_at:Date | null
+    title:string,
+    created_at:string,
+    updated_at:string
 }
 
 
@@ -72,16 +72,16 @@ const MarketingPage = () => {
             <FilterButton options={options} type="Sort"/>
         </div> */}
         <div>
-            <h2 className="text-2xl text-black text-shadow mt-6">Crowd Funding</h2>
+            <h2 className="text-xl sm:text-2xl text-black text-shadow sm:mt-6 mt-2">Crowd Funding</h2>
             <CrowdFundingCarousel/>
         </div>
         
-        <div className="bg-gray-200 mt-12 py-6">
-            <h2 className="text-2xl text-black text-shadow ">Skill Swap</h2>
+        <div className="bg-gray-200 sm:mt-12 py-3 sm:py-6">
+            <h2 className="text-xl sm:text-2xl text-black text-shadow sm:mt-6 mt-2">Skill Swap</h2>
             <SkillSwapCarousel/>
         </div>
         <div>
-            <h2 className="text-2xl text-black text-shadow mt-6">Question Answer</h2>
+            <h2 className="text-xl sm:text-2xl text-black text-shadow sm:mt-6 mt-2">Question Answer</h2>
             <QACarousel />
         </div>
         

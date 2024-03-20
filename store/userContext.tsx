@@ -1,52 +1,71 @@
 "use client"
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { getRegisterForm, RegisterFormData, FormSelectData } from "../services/auth"; // Import getRegisterForm function and related types
 
-// Define the shape of user data (you can adjust this based on your actual user data structure)
 export interface UserData {
-  name:string;
-  photo:string;
-  token:string;
-  student_id:number;
-  email:string;
-  is_student:boolean;
+  name: string;
+  photo: string;
+  token: string;
+  student_id: number;
+  email: string;
+  is_student: boolean;
 }
-// Create a context for user data
-const UserContext = createContext<{ user: UserData | null | undefined; setUser: (user: UserData | null | undefined) => void }>({
+
+interface UserContextData {
+  user: UserData | null | undefined;
+  setUser: (user: UserData | null | undefined) => void;
+  formData: RegisterFormData | null;
+}
+
+const UserContext = createContext<UserContextData>({
   user: null,
   setUser: () => {},
+  formData: null,
 });
 
 export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<UserData | null | undefined>(null);
+  const [formData, setFormData] = useState<RegisterFormData | null>(null);
   const [dataLoaded, setDataLoaded] = useState(false);
 
   useEffect(() => {
-    // Load user data from localStorage when the app starts
+    const fetchData = async () => {
+      console.log("fetching form")
+      try {
+        const formData = await getRegisterForm();
+        setFormData(formData);
+      } catch (error) {
+        console.error('Error fetching form data:', error);
+      }
+    };
+
     const storedUser = JSON.parse(localStorage.getItem('myAppUser') || 'null');
-    console.log('get localstorage')
     if (storedUser) {
       setUser(storedUser);
-      setDataLoaded(true);
     }
-  }, []); // Empty dependency array ensures this runs only once
+
+    fetchData(); // Fetch form data
+
+    setDataLoaded(true);
+  }, []);
+
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem('myAppUser', JSON.stringify(user));
+    } else {
+      localStorage.setItem('myAppUser', JSON.stringify(null));
+    }
+  }, [user]);
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
-      {children}
+    <UserContext.Provider value={{ user, setUser, formData }}>
+      {dataLoaded ? children : <div>Loading...</div>}
     </UserContext.Provider>
   );
 };
 
-// Custom hook to access user data
 export const useUser = () => {
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser, formData } = useContext(UserContext);
 
-  // Update user data in localStorage when setUser is called
-  useEffect(() => {
-    if (user) {
-      localStorage.setItem('myAppUser', JSON.stringify(user));
-    }
-  }, [user]);
-
-  return { user, setUser };
+  return { user, setUser, formData };
 };

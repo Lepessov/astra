@@ -1,5 +1,4 @@
-import Footer from "./_components/footer";
-import { Header } from "./_components/header";
+import Drawer from "./_components/drawer";
 import { Toaster } from 'sonner';
 
 const MarketingLayout = (
@@ -9,13 +8,13 @@ const MarketingLayout = (
         children : React.ReactNode
     })    => {
     return (
-        <div>
-            <Header />
+        <div className="">
+            <Drawer/>
             <main>
                 {children}
             </main>
             <Toaster/>
-            <Footer />
+            {/* <Footer /> */}
         </div>
     )
 };

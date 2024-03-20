@@ -24,8 +24,8 @@ import { useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox"
 import { useUser } from "@/store/userContext";
 import { registerUser } from "@/services/auth";
-import { formSchema } from "@/data/mockdata";
 import { useRouter } from 'next/navigation';
+import { formSchemaRegistration } from "@/form-schema";
 
 
 
@@ -54,8 +54,8 @@ const checkboxOptions:CheckboxGenderOptions[] = [
 ]
 const RegisterPage: React.FC = () => {
   const [selectedGender, setSelectedGender] = useState<"Male" | "Female" | "Other">("Male");
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof formSchemaRegistration>>({
+    resolver: zodResolver(formSchemaRegistration),
     defaultValues: {
       name:"",
       lastname:"",
@@ -75,16 +75,16 @@ const RegisterPage: React.FC = () => {
   const accountType = form.watch("accountType");
 
   const router = useRouter()
-  const handleSubmit = async (values: z.infer<typeof formSchema>) => {
+  const handleSubmit = async (values: z.infer<typeof formSchemaRegistration>) => {
     values.gender = selectedGender;
-    const loginResult = await registerUser(values);
-    if (loginResult.success) {
+    const registerResult = await registerUser(values);
+    if (registerResult.success) {
       // Set the user data if login is successful
-      console.log("User logged in successfully:", loginResult);
+      console.log("User logged in successfully:", registerResult);
       router.replace("/login")
     } else {
       // Handle login error
-      console.error("Login failed:", loginResult);
+      console.error("Register failed:", registerResult);
     }
   };
 
@@ -92,7 +92,6 @@ const RegisterPage: React.FC = () => {
     setSelectedGender(e.target.value)
   }
 
-  const {user,setUser} = useUser();
   
   return (
     <main className="h-screen lg:px-20">
@@ -100,7 +99,7 @@ const RegisterPage: React.FC = () => {
         {/* <button onClick={()=>{setUser({id:1,name:"me",email:"AA@gmail.com"})}}>{user?.name}</button> */}
         <form
           onSubmit={form.handleSubmit(handleSubmit)}
-          className="h-full flex flex-col justify-around"
+          className="w-[90vw] sm:w-[50vw] mx-auto flex flex-col justify-around"
         >
           <FormField
             control={form.control}
@@ -108,7 +107,7 @@ const RegisterPage: React.FC = () => {
             render={({ field }) => {
               return (
                 <FormItem>
-                  <FormLabel>Account type</FormLabel>
+                  <FormLabel className="text-xs sm:text-base">Account type</FormLabel>
                   <Select onValueChange={field.onChange}>
                     <FormControl>
                       <SelectTrigger>
@@ -124,19 +123,17 @@ const RegisterPage: React.FC = () => {
               );
             }}
           />
-          <div className="flex flex-col md:flex-row  max-w-5xl justify-between w-full mx-auto">
           <CheckboxRadioGroup onChange={handleChangeGender} selectedOption={selectedGender} options={checkboxOptions}/>
-          <div className="flex w-full justify-around md:w-2/3 mb-5">
             <FormField
               control={form.control}
               name="name"
               render={({ field }) => {
                 return (
-                  <FormItem>
-                    <FormLabel>ENTER NAME</FormLabel>
+                  <FormItem className=" min-w-32">
+                    <FormLabel className="text-xs sm:text-base">ENTER NAME</FormLabel>
                     <FormControl>
                       <Input
-                        className="focus-visible:ring-0 focus-visible:ring-transparent rounded-none focus-visible:ring-offset-0 border-transparent border-b-zinc-500 text-black"
+                    className="w-full bg-[#F2F5FF] border-none focus-visible:ring-0 focus-visible:ring-transparent  focus-visible:ring-offset-0   text-black"
                         placeholder="Name"
                         type="text"
                         {...field}
@@ -152,11 +149,11 @@ const RegisterPage: React.FC = () => {
               name="lastname"
               render={({ field }) => {
                 return (
-                  <FormItem>
-                    <FormLabel>ENTER LASTNAME</FormLabel>
+                  <FormItem className=" min-w-32">
+                    <FormLabel className="text-xs sm:text-base">ENTER LASTNAME</FormLabel>
                     <FormControl>
                       <Input
-                        className="focus-visible:ring-0 focus-visible:ring-transparent rounded-none focus-visible:ring-offset-0 border-transparent border-b-zinc-500 text-black"
+                    className="w-full bg-[#F2F5FF] border-none focus-visible:ring-0 focus-visible:ring-transparent  focus-visible:ring-offset-0   text-black"
                         placeholder="Lastame"
                         type="text"
                         {...field}
@@ -167,22 +164,19 @@ const RegisterPage: React.FC = () => {
                 );
               }}
             />
-          </div>
           
-          </div>
           {accountType=="student" && (
-            <div className="flex flex-col md:flex-row justify-between mb-5">
-              <div className="flex w-full justify-around mb-5">
+            <div className="">   
               <FormField
               control={form.control}
               name="university"
               render={({ field }) => {
                 return (
-                  <FormItem>
-                    <FormLabel>ENTER YOUR UNIVERSITY</FormLabel>
+                  <FormItem className=" min-w-32">
+                    <FormLabel className="text-xs sm:text-base">ENTER YOUR UNIVERSITY</FormLabel>
                     <FormControl>
                       <Input
-                        className="focus-visible:ring-0 focus-visible:ring-transparent rounded-none focus-visible:ring-offset-0 border-transparent border-b-zinc-500 text-black"
+                    className="w-full bg-[#F2F5FF] border-none focus-visible:ring-0 focus-visible:ring-transparent  focus-visible:ring-offset-0   text-black"
                         placeholder="Sdu"
                         type="text"
                         {...field}
@@ -198,11 +192,11 @@ const RegisterPage: React.FC = () => {
               name="course"
               render={({ field }) => {
                 return (
-                  <FormItem>
-                    <FormLabel>ENTER COURSE</FormLabel>
+                  <FormItem className=" min-w-32">
+                    <FormLabel className="text-xs sm:text-base">ENTER COURSE</FormLabel>
                     <FormControl>
                       <Input
-                        className="focus-visible:ring-0 focus-visible:ring-transparent rounded-none focus-visible:ring-offset-0 border-transparent border-b-zinc-500 text-black"
+                    className="w-full bg-[#F2F5FF] border-none focus-visible:ring-0 focus-visible:ring-transparent  focus-visible:ring-offset-0   text-black"
                         placeholder="4"
                         type="text"
                         {...field}
@@ -213,18 +207,18 @@ const RegisterPage: React.FC = () => {
                 );
               }}
             />
-              </div>
-              <div className="flex w-full justify-around">
+              
+              
               <FormField
               control={form.control}
               name="faculty"
               render={({ field }) => {
                 return (
-                  <FormItem>
-                    <FormLabel>ENTER FACULTY</FormLabel>
+                  <FormItem className=" min-w-32">
+                    <FormLabel className="text-xs sm:text-base">ENTER FACULTY</FormLabel>
                     <FormControl>
                       <Input
-                        className="focus-visible:ring-0 focus-visible:ring-transparent rounded-none focus-visible:ring-offset-0 border-transparent border-b-zinc-500 text-black"
+                    className="w-full bg-[#F2F5FF] border-none focus-visible:ring-0 focus-visible:ring-transparent  focus-visible:ring-offset-0   text-black"
                         placeholder="engineering"
                         type="text"
                         {...field}
@@ -240,11 +234,11 @@ const RegisterPage: React.FC = () => {
               name="speciality"
               render={({ field }) => {
                 return (
-                  <FormItem>
-                    <FormLabel>ENTER SPECIALITY</FormLabel>
+                  <FormItem className=" min-w-32">
+                    <FormLabel className="text-xs sm:text-base">ENTER SPECIALITY</FormLabel>
                     <FormControl>
                       <Input
-                        className="focus-visible:ring-0 focus-visible:ring-transparent rounded-none focus-visible:ring-offset-0 border-transparent border-b-zinc-500 text-black"
+                    className="w-full bg-[#F2F5FF] border-none focus-visible:ring-0 focus-visible:ring-transparent  focus-visible:ring-offset-0   text-black"
                         placeholder="information system"
                         type="text"
                         {...field}
@@ -255,24 +249,22 @@ const RegisterPage: React.FC = () => {
                 );
               }}
             />
-              </div>
+              
             
             </div>
           )}
           
-          <div className="flex flex-col md:flex-row  justify-between">
-            <div className="flex w-full justify-around mb-5">
               <FormField
             control={form.control}
             name="emailAddress"
             render={({ field }) => {
               return (
-                <FormItem>
-                  <FormLabel>CORPORATIVE EMAIL ADDRESS</FormLabel>
+                <FormItem className=" min-w-32">
+                  <FormLabel className="text-xs sm:text-base">EMAIL ADDRESS</FormLabel>
                   <FormControl>
                     <Input
-                      className="focus-visible:ring-0 focus-visible:ring-transparent rounded-none focus-visible:ring-offset-0 border-transparent border-b-zinc-500 text-black"
-                      placeholder="Email address"
+                    className="w-full bg-[#F2F5FF] border-none focus-visible:ring-0 focus-visible:ring-transparent  focus-visible:ring-offset-0   text-black"
+                    placeholder="Email address"
                       type="email"
                       {...field}
                     />
@@ -287,11 +279,11 @@ const RegisterPage: React.FC = () => {
             name="contact_number"
             render={({ field }) => {
               return (
-                <FormItem>
-                  <FormLabel>ENTER CONTUCT NUMBER</FormLabel>
+                <FormItem className=" min-w-32">
+                  <FormLabel className="text-xs sm:text-base">CONTUCT NUMBER</FormLabel>
                   <FormControl>
                     <Input
-                    className="focus-visible:ring-0 focus-visible:ring-transparent rounded-none focus-visible:ring-offset-0 border-transparent border-b-zinc-500 text-black"
+                    className="w-full bg-[#F2F5FF] border-none focus-visible:ring-0 focus-visible:ring-transparent  focus-visible:ring-offset-0   text-black"
                     placeholder="+7 700 800 60 70"
                     type="tel" {...field}
                     />
@@ -301,18 +293,17 @@ const RegisterPage: React.FC = () => {
               );
             }}
           />
-            </div>
-            <div className="flex w-full justify-around">
+            
             <FormField
             control={form.control}
             name="password"
             render={({ field }) => {
               return (
-                <FormItem>
-                  <FormLabel>ENTER PASSWORD</FormLabel>
+                <FormItem className=" min-w-32">
+                  <FormLabel className="text-xs sm:text-base">ENTER PASSWORD</FormLabel>
                   <FormControl>
                     <Input
-                    className="focus-visible:ring-0 focus-visible:ring-transparent rounded-none focus-visible:ring-offset-0 border-transparent border-b-zinc-500 text-black"
+                    className="w-full bg-[#F2F5FF] border-none focus-visible:ring-0 focus-visible:ring-transparent  focus-visible:ring-offset-0   text-black"
                     placeholder="Password"
                     type="password" {...field}
                     />
@@ -327,12 +318,12 @@ const RegisterPage: React.FC = () => {
             name="passwordConfirm"
             render={({ field }) => {
               return (
-                <FormItem>
-                  <FormLabel>CONFIRM PASSWORD</FormLabel>
+                <FormItem className=" min-w-32">
+                  <FormLabel className="text-xs sm:text-base">CONFIRM PASSWORD</FormLabel>
                   <FormControl>
                     <Input
-                      className="focus-visible:ring-0 focus-visible:ring-transparent rounded-none focus-visible:ring-offset-0 border-transparent border-b-zinc-500 text-black"
-                      placeholder="Password confirm"
+                    className="w-full bg-[#F2F5FF] border-none focus-visible:ring-0 focus-visible:ring-transparent  focus-visible:ring-offset-0   text-black"
+                    placeholder="Password confirm"
                       type="password"
                       {...field}
                     />
@@ -342,11 +333,9 @@ const RegisterPage: React.FC = () => {
               );
             }}
           />
-            </div>
           
           
           
-          </div>
           <FormField
           control={form.control}
           name="agreement"
@@ -359,7 +348,7 @@ const RegisterPage: React.FC = () => {
                 />
               </FormControl>
               <div className="space-y-1 leading-none">
-                <FormLabel>
+                <FormLabel className="text-xs sm:text-base">
                   Use different settings for my agreement devices
                 </FormLabel>
               </div>
