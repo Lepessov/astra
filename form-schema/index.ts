@@ -88,7 +88,7 @@ const formSchemaRegistration = z
 
   const formSchemaSkillSwapFilter = z
   .object({
-    sort_type: z.string(),
+    sort_type: z.any(),
     start_date: z.date().or(z.undefined()),
     end_date: z.date().or(z.undefined()),
     start_cost: z.string(),
@@ -99,7 +99,7 @@ const formSchemaRegistration = z
 
   const formSchemaNewFormCF = z
   .object({
-    photo: z.instanceof(File).or(z.undefined()).or(z.null()),
+    photo: z.string(),
     content:z.string().min(5),
     amount_money:z.string().min(1),
     planning_money:z.string().min(1),
