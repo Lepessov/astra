@@ -99,7 +99,7 @@ const formSchemaRegistration = z
 
   const formSchemaNewFormCF = z
   .object({
-    photo: z.instanceof(FileList).or(z.undefined()).or(z.null()),
+    photo: z.instanceof(File).or(z.undefined()).or(z.null()),
     content:z.string().min(5),
     amount_money:z.string().min(1),
     planning_money:z.string().min(1),
