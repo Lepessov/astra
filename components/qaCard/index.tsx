@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react";
-import { QACard } from "@/app/(marketing)/page";
+import { QACard } from "@/app/(working)/page";
 import Image from "next/image";
 
 const QACardItem = ({ info, cardColor }: { info:QACard, cardColor:string }) => {

@@ -1,10 +1,4 @@
 
-import SkillSwapCarousel from "@/components/carousel/ss-cards";
-import { FilterButton } from "./_components/filter-button";
-import CrowdFundingCarousel from "@/components/carousel/cf-cards";
-import QACarousel from "@/components/carousel/qa-cards";
-
-
 const options = [
     {
         title: "1title",
@@ -71,19 +65,9 @@ const MarketingPage = () => {
             <FilterButton options={options} type="Filter"/>
             <FilterButton options={options} type="Sort"/>
         </div> */}
-        <div>
-            <h2 className="text-xl sm:text-2xl text-black text-shadow sm:mt-6 mt-2">Crowd Funding</h2>
-            <CrowdFundingCarousel/>
-        </div>
         
-        <div className="bg-gray-200 sm:mt-12 py-3 sm:py-6">
-            <h2 className="text-xl sm:text-2xl text-black text-shadow sm:mt-6 mt-2">Skill Swap</h2>
-            <SkillSwapCarousel/>
-        </div>
-        <div>
-            <h2 className="text-xl sm:text-2xl text-black text-shadow sm:mt-6 mt-2">Question Answer</h2>
-            <QACarousel />
-        </div>
+            <h2 className="text-xl sm:text-2xl text-black text-shadow sm:mt-6 mt-2">Crowd Funding</h2>
+        
         
     </div>
   );

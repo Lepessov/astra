@@ -1,4 +1,4 @@
-import { CheckboxGenderOptions } from "@/app/(auth)/register/page";
+import { CheckboxGenderOptions } from "@/app/(working)/(auth)/register/page";
 import ToggleCheckbox from "../ui/toggle-checkbox";
 
 

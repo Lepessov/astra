@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Search } from "@/components/search";
 import {StretchVertical, LayoutList, SlidersHorizontal, MessageCircle, } from "lucide-react"
 import AppDrawer from "./_components/app-drawer";
-import { DialogDemo } from "./_components/modals-new-form/croud-funding-form";
+import { CreateNew } from "./_components/modals-new-form/new-form";
 
 const AppsLayout = (
     {
@@ -17,8 +17,7 @@ const AppsLayout = (
     return (
         <div className=" bg-white ">
             
-            <div className={`fixed lg:static w-full lg:w-[450px] flex flex-col float-left overflow-hidden mx-auto lg:m-0 bg-white z-10 px-3 transition-all ${filter?"lg:ml-[-450px] ml-[-100vw]":"ml-0"}`}>
-                
+            <div className={`static h-screen  w-full  lg:w-[450px] flex flex-col float-left overflow-hidden mx-auto lg:m-0 bg-white z-10 px-3 transition-all ${filter?"lg:ml-[-450px] ml-[-100vw]":"ml-[100vw]"}`}>
                 <h2 className="mb-2 text-2xl mx-auto lg:m-0 lg:ml-3 lg:mt-5 font-bold">Category</h2>
                 <div className="mx-auto">
                 <Search/>
@@ -42,8 +41,8 @@ const AppsLayout = (
                     </Button>
                 </div>
                 <div className='flex justify-between w-52'>
+                    <CreateNew/>
                     {/* <Button className='rounded-full bg-gray-600 min-w-20 hover:bg-blue'>+ New</Button> */}
-                    <DialogDemo/>
                     <Button className={`rounded-full ${filter?"bg-white text-black":"bg-[#212153] text-white"} min-w-20 hover:bg-blue`} 
                     onClick={()=>{setFilter(!filter)}} >
                         <SlidersHorizontal className="w-5 pr-1"/> Filter
