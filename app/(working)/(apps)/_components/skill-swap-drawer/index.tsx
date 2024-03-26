@@ -53,6 +53,7 @@ const SkillSwapDrawer: React.FC = () => {
   });
 
   const handleSubmit =  (values: z.infer<typeof formSchemaSkillSwapFilter>) => {
+    const existingParams = window.location.search
     let str = `?sort_type=${values.sort_type}&start_date=${values.start_date?format(values.start_date, 'y-MM-dd'):undefined}&end_date=${values.end_date?format(values.end_date, 'y-MM-dd'):undefined}&start_cost=${values.start_cost}&end_cost=${values.end_cost}`
     const formattedStartDate = values.start_date?format(values.start_date, 'y-MM-dd'):"undefined";
     const formattedEndDate = values.end_date?format(values.end_date, 'y-MM-dd'):"undefined";
@@ -65,7 +66,7 @@ const SkillSwapDrawer: React.FC = () => {
     }).toString();
     console.log(pathName.split('/filter'))
 
-  router.push(`${pathName.split('/filter')[0]}/filter?${queryParams}`);
+  router.push(`${pathName.split('/filter')[0]}/filter${existingParams}?${queryParams}`);
   };
 
   
