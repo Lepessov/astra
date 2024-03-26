@@ -12,23 +12,16 @@ export const Search = () => {
     const router = useRouter();
     const [value,setValue] = useState('');
 
-    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+    const onSubmit = (e: React.FormEvent<HTMLFormElement>, basePath: string) => {
+        
+        console.log('uqrl')
 
-        if(!value) return;
-
-        const url = qs.stringifyUrl({
-            url: '/',
-            query: {term:value},
-        },{skipEmptyString:true})
-
-        router.push(url);
     };
 
 
     return (
         <form
-        onSubmit={onSubmit}
+        onSubmit={(e) => onSubmit(e, 'skill_swap')}
         className="relative w-full sm:w-[400px] flex items-center"
         >
             <Button

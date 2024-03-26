@@ -16,6 +16,8 @@ import { format } from "date-fns"
 import { useForm } from "react-hook-form"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button";
+import qs from "query-string";
+
 import {
   SelectValue,
   SelectTrigger,
@@ -30,9 +32,15 @@ import {
   } from "@/components/ui/popover"
 import { formSchemaSkillSwapFilter } from "@/form-schema";
 import { Input } from "@/components/ui/input";
+import { useParams, usePathname, useRouter, useSearchParams } from "next/navigation";
 
 
 const SkillSwapDrawer: React.FC = () => {
+  const pathName = usePathname();
+  const router = useRouter();
+  const params = useParams<{ id: string }>()
+  const searchParams = useSearchParams();
+
   const form = useForm<z.infer<typeof formSchemaSkillSwapFilter>>({
     resolver: zodResolver(formSchemaSkillSwapFilter),
     defaultValues: {
@@ -45,7 +53,19 @@ const SkillSwapDrawer: React.FC = () => {
   });
 
   const handleSubmit =  (values: z.infer<typeof formSchemaSkillSwapFilter>) => {
-    console.log(values)
+    let str = `?sort_type=${values.sort_type}&start_date=${values.start_date?format(values.start_date, 'y-MM-dd'):undefined}&end_date=${values.end_date?format(values.end_date, 'y-MM-dd'):undefined}&start_cost=${values.start_cost}&end_cost=${values.end_cost}`
+    const formattedStartDate = values.start_date?format(values.start_date, 'y-MM-dd'):"undefined";
+    const formattedEndDate = values.end_date?format(values.end_date, 'y-MM-dd'):"undefined";
+    const queryParams = new URLSearchParams({
+      sort_type: values.sort_type,
+      start_date: formattedStartDate,
+      end_date: formattedEndDate,
+      start_cost: values.start_cost,
+      end_cost: values.end_cost
+    }).toString();
+    console.log(pathName.split('/filter'))
+
+  router.push(`${pathName.split('/filter')[0]}/filter?${queryParams}`);
   };
 
   

@@ -3,32 +3,38 @@
 import qs from "query-string";
 import { ReactNode, useState } from "react";
 import {SearchIcon, X} from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter,usePathname, useSearchParams } from "next/navigation";
 
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 
 export const Search = ({Icon=<></>}:{Icon?:ReactNode}) => {
     const router = useRouter();
+    const pathName = usePathname();
+    const sParams = useSearchParams();
+
     const [value,setValue] = useState('');
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
+    
         if(!value) return;
 
         const url = qs.stringifyUrl({
-            url: '/',
-            query: {term:value},
+            url: `${pathName}/`,
+            query: {query:value},
         },{skipEmptyString:true})
-
+        sParams.forEach(item => {
+            console.log(item)
+        })
+    
         router.push(url);
     };
 
 
     return (
         <form
-        onSubmit={onSubmit}
+        onSubmit={(e) => onSubmit(e)}
         className="relative w-full sm:w-[400px] flex items-center"
         >
             <Button

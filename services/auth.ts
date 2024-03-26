@@ -60,7 +60,7 @@ export async function loginUser(credentials: {
   
 async function getFiveCroudFunding(): Promise<AxiosResponse<CFCard[]>> {
   try {
-    const res = await axios.get<CFCard[]>(`${apiURL}/api/posts`);
+    const res = await axios.get<CFCard[]>(`${apiURL}/api/skill_funds/all`);
     return res;
   } catch (error) {
     throw new Error((error as Error).message);
@@ -68,7 +68,7 @@ async function getFiveCroudFunding(): Promise<AxiosResponse<CFCard[]>> {
 }
 async function getFiveSkillSwap(): Promise<AxiosResponse<SSCard[]>> {
   try {
-    const res = await axios.get<SSCard[]>(`${apiURL}/api/skill_funds`);
+    const res = await axios.get<SSCard[]>(`${apiURL}/api/posts/all`);
     return res;
   } catch (error) {
     throw new Error((error as Error).message);
@@ -76,7 +76,7 @@ async function getFiveSkillSwap(): Promise<AxiosResponse<SSCard[]>> {
 }
 async function getFiveQA(): Promise<AxiosResponse<QACard[]>> {
   try {
-    const res = await axios.get<QACard[]>(`${apiURL}/api/questions`);
+    const res = await axios.get<QACard[]>(`${apiURL}/api/questions/all`);
     return res;
   } catch (error) {
     throw new Error((error as Error).message);
