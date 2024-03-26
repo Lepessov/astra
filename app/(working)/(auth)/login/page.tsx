@@ -37,6 +37,7 @@ const LoginPage: React.FC = () => {
       setUser(loginResult.data);
       console.log("User logged in successfully:", loginResult);
       router.replace("/")
+      console.log('setUser : ',loginResult.data)
 
     } else {
       setUser({

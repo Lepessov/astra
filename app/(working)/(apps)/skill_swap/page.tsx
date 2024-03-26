@@ -18,6 +18,7 @@ const SkillSwapPage: React.FC = () => {
 
   useEffect(() => {
     if(user){
+      console.log(user,'true')
       getFiveSkillSwap(user.token)
         .then((jsonData) => {
           setData(jsonData.data);
@@ -30,6 +31,10 @@ const SkillSwapPage: React.FC = () => {
           });
           setLoading(false);
         });}
+        else{
+          console.log(user,'false')
+
+        }
   }, []);
     return (
       <div className="h-[500px]  overflow-auto flex flex-col bg-[#EBECF1] ">
