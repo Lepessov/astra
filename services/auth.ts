@@ -6,6 +6,9 @@ import { UserData, useUser } from "@/store/userContext";
 import { z } from "zod";
 import axios, { AxiosResponse } from 'axios';
 
+interface ISSCard{
+  data:SSCard[]
+}
 
 // Function to register a new user
 
@@ -67,7 +70,7 @@ async function getFiveCroudFunding(): Promise<AxiosResponse<CFCard[]>> {
     throw new Error((error as Error).message);
   }
 }
-async function getFiveSkillSwap(token:string): Promise<AxiosResponse<SSCard[]>> {
+async function getFiveSkillSwap(token:string): Promise<AxiosResponse<ISSCard>> {
 
   try {
     const config = {
@@ -76,7 +79,7 @@ async function getFiveSkillSwap(token:string): Promise<AxiosResponse<SSCard[]>> 
       },
     };
 
-    const res = await axios.get<SSCard[]>(`${apiURL}/api/posts/all`, config);
+    const res = await axios.get<ISSCard>(`${apiURL}/api/posts/all`, config);
     return res;
   } catch (error) {
     throw new Error((error as Error).message);

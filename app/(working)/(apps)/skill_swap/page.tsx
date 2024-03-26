@@ -22,7 +22,7 @@ const SkillSwapPage: React.FC = () => {
       getFiveSkillSwap(user.token)
         .then((jsonData) => {
           console.log(jsonData)
-          // setData(jsonData.data);
+          setData(jsonData.data.data);
           setLoading(false);
         })
         .catch((error) => {
