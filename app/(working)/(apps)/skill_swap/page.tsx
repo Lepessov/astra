@@ -8,25 +8,28 @@ import { croudFundingCards, qaCards, skillSwapCards } from "@/data/mockdata";
 import {Clock9} from "lucide-react"
 import { Skeleton } from "@/components/ui/skeleton";
 import Link from "next/link";
+import { useUser } from "@/store/userContext";
 
 const SkillSwapPage: React.FC = () => {
   const [data, setData] = useState<SSCard[]>([]);
   const [loading, setLoading] = useState(true);
+  const {user} = useUser();
 
 
   useEffect(() => {
-    getFiveSkillSwap()
-      .then((jsonData) => {
-        setData(jsonData.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        setData(skillSwapCards);
-        toast('Error', {
-          description: error.message
-        });
-        setLoading(false);
-      });
+    if(user){
+      getFiveSkillSwap(user.token)
+        .then((jsonData) => {
+          setData(jsonData.data);
+          setLoading(false);
+        })
+        .catch((error) => {
+          setData(skillSwapCards);
+          toast('Error', {
+            description: error.message
+          });
+          setLoading(false);
+        });}
   }, []);
     return (
       <div className="h-[500px]  overflow-auto flex flex-col bg-[#EBECF1] ">

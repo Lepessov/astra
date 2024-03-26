@@ -6,6 +6,7 @@ import { UserData, useUser } from "@/store/userContext";
 import { z } from "zod";
 import axios, { AxiosResponse } from 'axios';
 
+
 // Function to register a new user
 
 const apiURL = "http://127.0.0.1:8000"
@@ -66,9 +67,16 @@ async function getFiveCroudFunding(): Promise<AxiosResponse<CFCard[]>> {
     throw new Error((error as Error).message);
   }
 }
-async function getFiveSkillSwap(): Promise<AxiosResponse<SSCard[]>> {
+async function getFiveSkillSwap(token:string): Promise<AxiosResponse<SSCard[]>> {
+
   try {
-    const res = await axios.get<SSCard[]>(`${apiURL}/api/posts/all`);
+    const config = {
+      headers: {
+        Authorization: token, // Replace 'token' with your actual token value
+      },
+    };
+
+    const res = await axios.get<SSCard[]>(`${apiURL}/api/posts/all`, config);
     return res;
   } catch (error) {
     throw new Error((error as Error).message);
