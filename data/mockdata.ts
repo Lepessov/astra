@@ -111,7 +111,8 @@ const qaCards: QACard[] = [
 const skillSwapCards: SSCard[] = [
   {
     id:1,
-    student_id:1,
+    name:"qwe",
+    surname:"qwery",
     photo: "https://avatars.mds.yandex.net/i?id=e1095d76245d2f6ef94f3309489c0c6ed78abf63-10619913-images-thumbs&n=13",
     content: "$1500 until project launch",
     status: true,
@@ -121,7 +122,8 @@ const skillSwapCards: SSCard[] = [
   },
   {
     id:2,
-    student_id:1,
+    name:"qwe",
+    surname:"qwery",
     content: "$1500 until project launch",
     status: true,
     title: "Tom Byrom",
@@ -131,7 +133,8 @@ const skillSwapCards: SSCard[] = [
   },
   {
     id:3,
-    student_id:1,
+    name:"qwe",
+    surname:"qwery",
     content: "$1500 until project launch",
     status: true,
     title: "Vladimir Malyavko",
@@ -141,7 +144,8 @@ const skillSwapCards: SSCard[] = [
   },
   {
     id:4,
-    student_id:1,
+    name:"qwe",
+    surname:"qwery",
     content: "$1500 until project launch",
     status: true,
     title: "Vladimir Malyavko",
@@ -151,7 +155,8 @@ const skillSwapCards: SSCard[] = [
   },
   {
     id:5,
-    student_id:1,
+    name:"qwe",
+    surname:"qwery",
     content: "$1500 until project launch",
     status: true,
     title: "Vladimir Malyavko",
