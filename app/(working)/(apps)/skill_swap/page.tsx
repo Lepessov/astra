@@ -32,7 +32,7 @@ const SkillSwapPage: React.FC = () => {
           setLoading(false);
         });}
         else{
-          console.log(user,'false')
+          console.log(user,'true')
 
         }
   }, []);

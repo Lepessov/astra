@@ -44,14 +44,15 @@ export interface QACard {
     created:string,
 }
 export interface SSCard {
+    name:string,
+    surname:string,
     id:number,
-    student_id:number,
     photo:string,
     content:string,
     status:boolean,
     title:string,
-    created_at:string,
-    updated_at:string
+    created_at?:string,
+    updated_at?:string
 }
 
 
