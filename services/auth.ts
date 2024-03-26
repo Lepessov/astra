@@ -72,7 +72,7 @@ async function getFiveSkillSwap(token:string): Promise<AxiosResponse<SSCard[]>> 
   try {
     const config = {
       headers: {
-        Authorization: token, // Replace 'token' with your actual token value
+        Authorization: `Bearer ${token}`, // Replace 'token' with your actual token value
       },
     };
 
