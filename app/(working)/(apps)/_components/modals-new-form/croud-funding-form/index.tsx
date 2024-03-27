@@ -28,6 +28,7 @@ const CreateNewFormCF = ({handleSubmit}:{handleSubmit:SubmitHandler}) => {
   const form = useForm<z.infer<typeof formSchemaNewFormCF>>({
     resolver: zodResolver(formSchemaNewFormCF),
     defaultValues: {
+      btnType:"CF",
       photo: "",
       content:"",
       amount_money:"",

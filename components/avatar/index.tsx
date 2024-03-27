@@ -45,14 +45,20 @@ import { useUser } from "@/store/userContext";
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
         <div className="flex items-center cursor-pointer">
-        <Image
-          src={info.photo}
-          alt={`Photo by ${info.name}`}
-          className="rounded-full w-11 h-11 object-cover mr-2"
-          width={45}
-          height={45}
-        />
-        <span>{info.name}</span>
+          {info.photo?(
+            <Image
+            src={info.photo}
+            alt={`Photo by ${info.name}`}
+            className="rounded-full w-11 h-11 object-cover mr-2"
+            width={45}
+            height={45}
+          />
+          ):(
+            <div className=" p-5 h-14 w-14 mx-auto mb-5 rounded-full flex items-center justify-center bg-cyan-400">
+              {info.name.charAt(1).toUpperCase()}
+              </div>
+          )}
+        
     </div>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56">

@@ -17,19 +17,15 @@ export const Search = ({Icon=<></>}:{Icon?:ReactNode}) => {
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-    
-        if(!value) return;
-
-        const url = qs.stringifyUrl({
-            url: `${pathName}/`,
-            query: {query:value},
-        },{skipEmptyString:true})
-        sParams.forEach(item => {
-            console.log(item)
-        })
-    
-        router.push(url);
-    };
+        const exist = new URLSearchParams(window.location.search)
+        const existingParams = Object.fromEntries(new URLSearchParams(window.location.search));
+        console.log("Existing Params:", existingParams);   
+        const queryParams = new URLSearchParams({
+            ... existingParams,
+            search:value,
+        }).toString();
+            router.push(`?${queryParams}`);
+  };
 
 
     return (

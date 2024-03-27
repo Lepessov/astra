@@ -2,19 +2,17 @@ import { Button } from "@/components/ui/button"
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
 import * as z from "zod";
-import { Input } from "@/components/ui/input"
 import CreateNewFormCF from "./croud-funding-form"
 import BtnTypes from "./btn-type"
 import { formSchemaNewFormCF } from "@/form-schema";
+import { useState } from "react";
 
 export function CreateNew() {
+  const [btnType, setBtnType] = useState<string>("CF")
+  
   const handleSubmit = async (values: z.infer<typeof formSchemaNewFormCF>) => {
     //   const loginResult = await loginUser(values);
     //   if (loginResult.success) {
@@ -34,6 +32,7 @@ export function CreateNew() {
     //     router.replace("/")
     //     console.error("Login failed:", loginResult.error);
     //   }
+    values.btnType = btnType
     console.log(values)
       };
   return (
@@ -42,7 +41,7 @@ export function CreateNew() {
         <Button className='rounded-full bg-gray-600 min-w-20 hover:bg-blue'>+ New</Button>
       </DialogTrigger>
       <DialogContent className="">
-        <BtnTypes/>
+        <BtnTypes btnType={btnType} setBtnType={setBtnType}/>
         <CreateNewFormCF handleSubmit={handleSubmit}/>
       </DialogContent>
     </Dialog>

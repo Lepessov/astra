@@ -1,23 +1,28 @@
 "use client"
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
-import {  getFiveCroudFunding, getFiveQA } from "@/services/auth";
-import {  CFCard, QACard } from "../../page";
+import {  getAllCroudFunding } from "@/services/auth";
+import {  CFCard } from "../../page";
 import { toast } from "sonner";
 import { croudFundingCards, qaCards } from "@/data/mockdata";
 import {Clock9} from "lucide-react"
 import { Skeleton } from "@/components/ui/skeleton";
 import Link from "next/link";
+import { useUser } from "@/store/userContext";
+import { useRouter } from "next/navigation";
 
 const CroudFundingPage: React.FC = () => {
+  
   const [data, setData] = useState<CFCard[]>([]);
   const [loading, setLoading] = useState(true);
-
+  const {user} = useUser();
+  const router = useRouter();
 
   useEffect(() => {
-    getFiveCroudFunding()
+    if(user){
+      getAllCroudFunding(user.token)
       .then((jsonData) => {
-        setData(jsonData.data);
+        setData(jsonData.data.data);
         setLoading(false);
       })
       .catch((error) => {
@@ -27,9 +32,15 @@ const CroudFundingPage: React.FC = () => {
         });
         setLoading(false);
       });
+    }
+    else{
+      router.replace("/login")
+    }
+
+    
   }, []);
     return (
-      <div className="h-[500px]  overflow-auto flex flex-col bg-[#EBECF1] ">
+      <div className="h-full overflow-auto flex flex-col bg-[#EBECF1] ">
         {/* <div className="bg-[#F2F5FF] w-[90%] mx-auto rounded-2xl my-2 p-5 text-left">
         <h2>English skills (B2 - Upper Intermediate)</h2>
         <p>1500 тг</p>

@@ -4,7 +4,10 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import logo from "./../../../../assets/photo/SS LOGO.svg"
 import Link from "next/link";
+import Avatar from "@/components/avatar";
+import { useUser } from "@/store/userContext";
 const Drawer = () => {
+  const {user} = useUser();
   const pathName= usePathname().split("/")[1];
   
     return (
@@ -52,9 +55,12 @@ const Drawer = () => {
         </Link>
         
         </div>
-        <div className="hidden sm:flex mb-5 cursor-pointer justify-center rounded-full items-center bg-red-600 mx-auto w-11 h-11">
+        {/* <div className="hidden sm:flex mb-5 cursor-pointer justify-center rounded-full items-center bg-red-600 mx-auto w-11 h-11">
           A
-        </div>
+        </div> */}
+        {user && (
+                  <Avatar info={{photo:user.photo,name:user.name}}/>
+        )}
     </div>
     );
   };

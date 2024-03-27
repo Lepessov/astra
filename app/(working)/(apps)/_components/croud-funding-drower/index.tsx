@@ -30,9 +30,11 @@ import {
   } from "@/components/ui/popover"
 import { formSchemaSkillSwapFilter } from "@/form-schema";
 import { Input } from "@/components/ui/input";
+import { useRouter } from "next/navigation";
 
 
 const CroudFundingDrawer: React.FC = () => {
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchemaSkillSwapFilter>>({
     resolver: zodResolver(formSchemaSkillSwapFilter),
     defaultValues: {
@@ -45,7 +47,20 @@ const CroudFundingDrawer: React.FC = () => {
   });
 
   const handleSubmit =  (values: z.infer<typeof formSchemaSkillSwapFilter>) => {
-    console.log(values)
+    const existingParams = Object.fromEntries(new URLSearchParams(window.location.search));
+    console.log("Existing Params:", existingParams);    const formattedStartDate = values.start_date?format(values.start_date, 'y-MM-dd'):"undefined";
+    const formattedEndDate = values.end_date?format(values.end_date, 'y-MM-dd'):"undefined";
+    const queryParams = new URLSearchParams({
+      ... existingParams,
+      sort_type: values.sort_type,
+      start_date: formattedStartDate,
+      end_date: formattedEndDate,
+      start_cost: values.start_cost,
+      end_cost: values.end_cost,
+      query: "filter"
+    }).toString();
+
+  router.push(`?${queryParams}`);
   };
 
   

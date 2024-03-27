@@ -15,7 +15,7 @@ const AppsLayout = (
     })    => {
         const [filter,setFilter] = useState<boolean>(true);
     return (
-        <div className=" bg-white ">
+        <div className=" bg-white max-h-screen">
             
             <div className={`static h-screen  w-full  lg:w-[450px] flex flex-col float-left overflow-hidden mx-auto lg:m-0 bg-white z-10 px-3 transition-all ${filter?"lg:ml-[-450px] ml-[-100vw]":"ml-[100vw]"}`}>
                 <h2 className="mb-2 text-2xl mx-auto lg:m-0 lg:ml-3 lg:mt-5 font-bold">Category</h2>
@@ -53,8 +53,9 @@ const AppsLayout = (
             <hr className="w-[95%] mx-auto  border-gray-300"/>
 
             </div>
-
-            {children}
+            <div className="h-[calc(100vh-225px)]">
+                {children}
+            </div>
         </div>
     )
 };

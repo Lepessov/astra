@@ -17,6 +17,11 @@ interface RouterDataItem{
 }
 
 export const routerData: RouterData = {
+    "all": {
+      title: "Main Page",
+      description:"Find skills to improve you gpa",
+      value:"all"
+    },
     "qa": {
         title: "Questino and Answer",
         description:"Post Question and get answer",
@@ -83,6 +88,11 @@ const AppHeader = () => {
       type="scroll"
     >
       <div  className="flex w-max ml-0  px-0 sm:mt-5 text-sm sm:text-lg">
+      <Link href="/all">
+      <div className={`w-44 text-sm text-center ${pathName==='all'?" text-blue-700 font-bold border-b-blue-700 border-b-2":""}`}>
+        <p className=' p-2'>All</p>
+      </div>
+      </Link>
       <Link href="/skill_swap">
       <div className={`w-44 text-sm text-center ${pathName==='skill_swap'?" text-blue-700 font-bold border-b-blue-700 border-b-2":""}`}>
         <p className=' p-2'>Skill Swap</p>

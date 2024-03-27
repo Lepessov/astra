@@ -9,6 +9,12 @@ import axios, { AxiosResponse } from 'axios';
 interface ISSCard{
   data:SSCard[]
 }
+interface ICFCard{
+  data:CFCard[]
+}
+interface IQACard{
+  data:QACard[]
+}
 
 // Function to register a new user
 
@@ -62,15 +68,21 @@ export async function loginUser(credentials: {
     }
   }
   
-async function getFiveCroudFunding(): Promise<AxiosResponse<CFCard[]>> {
+async function getAllCroudFunding(token:string): Promise<AxiosResponse<ICFCard>> {
   try {
-    const res = await axios.get<CFCard[]>(`${apiURL}/api/skill_funds/all`);
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`, // Replace 'token' with your actual token value
+      },
+    };
+
+    const res = await axios.get<ICFCard>(`${apiURL}/api/skill_funds/all`, config);
     return res;
   } catch (error) {
     throw new Error((error as Error).message);
   }
 }
-async function getFiveSkillSwap(token:string): Promise<AxiosResponse<ISSCard>> {
+async function getAllSkillSwap(token:string): Promise<AxiosResponse<ISSCard>> {
 
   try {
     const config = {
@@ -85,9 +97,14 @@ async function getFiveSkillSwap(token:string): Promise<AxiosResponse<ISSCard>> {
     throw new Error((error as Error).message);
   }
 }
-async function getFiveQA(): Promise<AxiosResponse<QACard[]>> {
+async function getAllQA(token:string): Promise<AxiosResponse<IQACard>> {
   try {
-    const res = await axios.get<QACard[]>(`${apiURL}/api/questions/all`);
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`, // Replace 'token' with your actual token value
+      },
+    };
+    const res = await axios.get<IQACard>(`${apiURL}/api/questions/all`, config);
     return res;
   } catch (error) {
     throw new Error((error as Error).message);
@@ -129,8 +146,8 @@ async function getRegisterForm(): Promise<RegisterFormData> {
 
 
 export {
-  getFiveCroudFunding,
-  getFiveQA,
-  getFiveSkillSwap,
+  getAllCroudFunding,
+  getAllQA,
+  getAllSkillSwap,
   getRegisterForm
 }

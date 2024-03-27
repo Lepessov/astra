@@ -99,6 +99,7 @@ const formSchemaRegistration = z
 
   const formSchemaNewFormCF = z
   .object({
+    btnType:z.string(),
     photo: z.string(),
     content:z.string().min(5),
     amount_money:z.string().min(1),
