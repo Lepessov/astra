@@ -14,6 +14,7 @@ class PostUpdateRequest extends BaseRequest
             'photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust max size as needed
             'content' => 'string',
             'status' => 'boolean',
+            'price' => 'numeric',
         ];
     }
 
@@ -32,6 +33,7 @@ class PostUpdateRequest extends BaseRequest
             'photo.max' => 'The photo may not be greater than 2048 kilobytes.',
             'content.string' => 'The content must be a string.',
             'status.boolean' => 'The status must be a boolean.',
+            'price.numeric' => 'The price column should be numeric.'
         ];
     }
 }

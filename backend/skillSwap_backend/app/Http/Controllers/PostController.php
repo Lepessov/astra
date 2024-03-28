@@ -55,13 +55,17 @@ class PostController extends Controller
     public function mainIndex(): JsonResponse
     {
         $posts = Post::query()
-            ->select('posts.title',
+            ->select(
+                'posts.id',
+                'posts.title',
                 'posts.content',
                 'posts.status',
                 'posts.photo',
                 'posts.created_at',
                 'students.name',
-                'students.surname')
+                'students.surname',
+            )
+
             ->join('students', 'posts.student_id', '=', 'students.id')
             ->latest()
             ->take(5)
@@ -72,7 +76,16 @@ class PostController extends Controller
 
     public function index(): JsonResponse
     {
-        $posts = Post::query()->paginate(10);
+        $posts = Post::query()
+            ->select(
+                'posts.id',
+                'posts.content',
+                'posts.photo',
+                'posts.created_at',
+                'posts.price'
+            )
+            ->with('categories:name')
+            ->paginate(10);
 
         return response()->json([
             'success' => true,

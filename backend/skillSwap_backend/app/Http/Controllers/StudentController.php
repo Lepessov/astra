@@ -21,16 +21,18 @@ class StudentController extends Controller
     {
         $data = $request->validated();
 
-        $isStudent = $service->isCorporateEmail($data['email']);
-
         $student = new Student([
-            'email' => $data['email'],
+            'email' => $data['emailAddress'],
             'gender' => $data['gender'],
-            'phone_number' => $data['phone_number'],
+            'phone_number' => $data['contact_number'],
             'name' => $data['name'],
-            'surname' => $data['surname'],
+            'surname' => $data['lastname'],
+            'university_id' => 1,
+            'faculty_id' => 1,
+            'speicialitity_id' => 1,
+            'course' => $data['course'],
             'password' => Hash::make($data['password']),
-            'is_student' => $isStudent,
+            'is_student' => $data['accountType'] == 'student',
         ]);
 
         $student->save();

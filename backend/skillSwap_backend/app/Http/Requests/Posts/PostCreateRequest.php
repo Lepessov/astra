@@ -14,6 +14,7 @@ class PostCreateRequest extends BaseRequest
             'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'content' => 'required|string',
             'status' => 'required|boolean',
+            'price' => 'required|numeric'
         ];
     }
 
@@ -37,6 +38,8 @@ class PostCreateRequest extends BaseRequest
             'content.string' => 'The content must be a string.',
             'status.required' => 'The status is required.',
             'status.boolean' => 'The status must be a boolean.',
+            'price.required' => 'The price column is required.',
+            'price.numeric' => 'The price column should be numeric.',
         ];
     }
 }
