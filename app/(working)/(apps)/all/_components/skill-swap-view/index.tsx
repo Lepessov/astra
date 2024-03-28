@@ -78,7 +78,7 @@ const SkillSwapView: React.FC = () => {
           <>
             {data.map(item => (
               <div key={item.id} className="bg-[#F2F5FF] w-[90%] mx-auto rounded-2xl my-2 p-5 text-left">
-                <h2>{item.title}</h2>
+                <h2 className="text-base font-bold">{item.title}</h2>
                 <p>{item.content}</p>
               
                 <span>Description</span> <br/>

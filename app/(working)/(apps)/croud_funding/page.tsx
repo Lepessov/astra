@@ -10,6 +10,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import Link from "next/link";
 import { useUser } from "@/store/userContext";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const CroudFundingPage: React.FC = () => {
   
@@ -104,17 +105,22 @@ const CroudFundingPage: React.FC = () => {
         ):(
           <>
             {data.map(item => (
-              <div key={item.id} className="bg-[#F2F5FF] w-[90%] mx-auto rounded-2xl my-2 p-5 text-left">
-                <h2>{item.title}</h2>
-                <p>{item.content}</p>
+              <div key={item.id} className="bg-[#F2F5FF] w-[90%] mx-auto rounded-2xl my-2 p-5 text-left relative">
+                <h2 className="font-semibold text-base">{item.title}</h2>
+                <p className="text-lg font-bold py-3">{item.planned_money} ₸</p>
               
-                <span>{item.planned_money}</span> <br/>
-                <span className="flex items-center"><Clock9/> {item.created_at}</span> <br/>
+                <span className="text-base">Earned {item.amount_money} ₸</span> <br/>
+                <span className="text-sm flex items-center"><Clock9 className="pr-2"/> Due date: {item.created_at}</span> <br/>
                 <Link href={`cf_posts/${item.id}`}>
                   <Button  className="mx-auto min-w-52 window-sm bg-[#212153] rounded-full text-white hover:bg-gray-400">
                       Respond
                   </Button>
                 </Link>
+                {item.photo && (
+                  <div className="absolute right-5 top-0 bottom-0 my-auto hidden lg:flex items-center justify-end max-w-[35%] w-full max-h-[200px] h-auto ">
+                    <Image  src={item.photo} width={300} height={200} className="rounded-lg my-auto  mt-2" alt="logo"/>
+                  </div>
+                )}
               </div>
           ))}
           </>

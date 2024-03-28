@@ -10,7 +10,7 @@ const croudFundingCards: CFCard[] = [
       planned_money: 5000,
       created_at: "2024-03-27",
       updated_at: "2024-03-27",
-      photo: "photo_url_1"
+      photo: "https://avatars.mds.yandex.net/i?id=e1095d76245d2f6ef94f3309489c0c6ed78abf63-10619913-images-thumbs&n=13"
   },
   {
       id: 2,
@@ -21,7 +21,7 @@ const croudFundingCards: CFCard[] = [
       planned_money: 6000,
       created_at: "2024-03-27",
       updated_at: "2024-03-27",
-      photo: "photo_url_2"
+      photo: "https://avatars.mds.yandex.net/i?id=e1095d76245d2f6ef94f3309489c0c6ed78abf63-10619913-images-thumbs&n=13"
   },
   {
       id: 3,
@@ -31,7 +31,8 @@ const croudFundingCards: CFCard[] = [
       amount_money: 1500,
       planned_money: 4000,
       created_at: "2024-03-27",
-      updated_at: "2024-03-27"
+      updated_at: "2024-03-27",
+      photo: "https://avatars.mds.yandex.net/i?id=e1095d76245d2f6ef94f3309489c0c6ed78abf63-10619913-images-thumbs&n=13"
   }
 ];
 
