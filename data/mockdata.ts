@@ -41,7 +41,7 @@ const croudFundingCards: CFCard[] = [
 const qaCards: QACard[] = [
   {
       id: 1,
-      author_photo: "author1.jpg",
+      author_photo: "",
       author_name: "Author 1",
       title: "Title 1",
       description: "Description 1",
@@ -64,7 +64,7 @@ const qaCards: QACard[] = [
   },
   {
       id: 3,
-      author_photo: "author3.jpg",
+      author_photo: "",
       author_name: "Author 3",
       title: "Title 3",
       description: "Description 3",
