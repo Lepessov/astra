@@ -47,7 +47,7 @@ const SkillSwapPage: React.FC = () => {
         <span>Возможен обмен Java skills</span> <br/>
         <span className="flex items-center"><Clock9/> 15:00 - 16:00 Mon/Wed/Fri</span> <br/>
         <Button  className="mx-auto min-w-52 window-sm bg-[#212153] rounded-full text-white hover:bg-gray-400">
-            Respond
+            Apply
           </Button>
         </div>
         <div className="bg-[#F2F5FF] w-[90%] mx-auto rounded-2xl my-2 p-5 text-left">
@@ -57,7 +57,7 @@ const SkillSwapPage: React.FC = () => {
         <span>Возможен обмен Java skills</span> <br/>
         <span className="flex items-center"><Clock9/> 15:00 - 16:00 Mon/Wed/Fri</span> <br/>
         <Button  className="mx-auto min-w-52 window-sm bg-[#212153] rounded-full text-white hover:bg-gray-400">
-            Respond
+            Apply
           </Button>
         </div>
         <div className="bg-[#F2F5FF] w-[90%] mx-auto rounded-2xl my-2 p-5 text-left">
@@ -67,7 +67,7 @@ const SkillSwapPage: React.FC = () => {
         <span>Возможен обмен Java skills</span> <br/>
         <span className="flex items-center"><Clock9/> 15:00 - 16:00 Mon/Wed/Fri</span> <br/>
         <Button  className="mx-auto min-w-52 window-sm bg-[#212153] rounded-full text-white hover:bg-gray-400">
-            Respond
+            Apply
           </Button>
         </div> */}
         {loading?(
@@ -113,7 +113,7 @@ const SkillSwapPage: React.FC = () => {
                 {/* <span className="flex items-center"><Clock9/> {item.created_at}</span> <br/> */}
                 <Link href={`ss_posts/${item.id}`}>
                   <Button  className="mx-auto mt-5 min-w-72 window-sm bg-[#212153] rounded-full text-white hover:bg-gray-400">
-                      Respond
+                      Apply
                   </Button>
                 </Link>
                 {item.photo && (

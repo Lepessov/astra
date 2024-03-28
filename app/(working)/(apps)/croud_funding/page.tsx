@@ -49,7 +49,7 @@ const CroudFundingPage: React.FC = () => {
         <span>Возможен обмен Java skills</span> <br/>
         <span className="flex items-center"><Clock9/> 15:00 - 16:00 Mon/Wed/Fri</span> <br/>
         <Button  className="mx-auto min-w-52 window-sm bg-[#212153] rounded-full text-white hover:bg-gray-400">
-            Respond
+            Donate
           </Button>
         </div>
         <div className="bg-[#F2F5FF] w-[90%] mx-auto rounded-2xl my-2 p-5 text-left">
@@ -113,7 +113,7 @@ const CroudFundingPage: React.FC = () => {
                 <span className="text-sm flex items-center"><Clock9 className="pr-2"/> Due date: {item.created_at}</span> <br/>
                 <Link href={`cf_posts/${item.id}`}>
                   <Button  className="mx-auto min-w-52 window-sm bg-[#212153] rounded-full text-white hover:bg-gray-400">
-                      Respond
+                      Donate
                   </Button>
                 </Link>
                 {item.photo && (
