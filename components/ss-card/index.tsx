@@ -1,37 +1,37 @@
 "use client"
 import * as React from "react";
-import Image from "next/image";
-import { useState } from "react"; // Import useState
-import { Bookmark, MapPin, AlertTriangle } from "lucide-react";
-import { toast } from 'sonner'
+// import Image from "next/image";
+// import { useState } from "react"; // Import useState
+// import { Bookmark, MapPin, AlertTriangle } from "lucide-react";
+// import { toast } from 'sonner'
 import { SSCard } from "@/app/(working)/page";
 
 const SSCardItem = ({ info, cardColor }: { info:SSCard, cardColor:string }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [filled, setFilled] = useState("none");
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [filled, setFilled] = useState("none");
 
-  const handleBookmarkClick = () => {
-    setFilled("white");
-    if (!isLoggedIn) {
+  // const handleBookmarkClick = () => {
+  //   setFilled("white");
+  //   if (!isLoggedIn) {
 
-      toast('Unauthorized', {
-        classNames: {
-        description: 'pl-4',
-        title: 'pl-4'
-      },
-        description: ' Please log in or register first to save it',
-        duration: 5000,
-        icon: <AlertTriangle className="w-8 h-8 mr-6" fill="#FFB800" stroke="white"/>,
-      });
-      setTimeout(() => {
-        setFilled("none");
-      }, 500); // Reset fill after 1 second
-    }
-  };
+  //     toast('Unauthorized', {
+  //       classNames: {
+  //       description: 'pl-4',
+  //       title: 'pl-4'
+  //     },
+  //       description: ' Please log in or register first to save it',
+  //       duration: 5000,
+  //       icon: <AlertTriangle className="w-8 h-8 mr-6" fill="#FFB800" stroke="white"/>,
+  //     });
+  //     setTimeout(() => {
+  //       setFilled("none");
+  //     }, 500); // Reset fill after 1 second
+  //   }
+  // };
 
   return (
     <div className={` w-[90vw] sm:w-96 mx-5 shadow-sm border hover:shadow-lg hover:px-3 transition duration-200 text-black rounded-lg overflow-y-auto sm:mx-7  md:ml-7 p-2  ${cardColor}`}>
-      <div className="relative">
+      {/* <div className="relative">
         <Image
           src={info.photo && "https://avatars.mds.yandex.net/i?id=e1095d76245d2f6ef94f3309489c0c6ed78abf63-10619913-images-thumbs&n=13"}
           alt={`Photo by ${info.title}`}
@@ -50,7 +50,7 @@ const SSCardItem = ({ info, cardColor }: { info:SSCard, cardColor:string }) => {
       <p className="flex items-end pb-2">
         <MapPin className="w-6 mb-1 mr-1" />
         <span>{info.content}</span>
-      </p>
+      </p> */}
     </div>
   );
 };
