@@ -22,7 +22,6 @@ import {
 import CheckboxRadioGroup from "@/components/checkbox-radio-group";
 import { useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox"
-import { useUser } from "@/store/userContext";
 import { registerUser } from "@/services/auth";
 import { useRouter } from 'next/navigation';
 import { formSchemaRegistration } from "@/form-schema";

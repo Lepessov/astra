@@ -81,8 +81,8 @@ const QAView: React.FC = () => {
                 <h2>{item.title}</h2>
                 <p>{item.description}</p>
               
-                <span>{item.author}</span> <br/>
-                <span className="flex items-center"><Clock9/> {item.created}</span> <br/>
+                <span>{item.author_name}</span> <br/>
+                <span className="flex items-center"><Clock9/> {item.created_at}</span> <br/>
                 <Link href={`qa_posts/${item.id}`}>
                   <Button  className="mx-auto min-w-52 window-sm bg-[#212153] rounded-full text-white hover:bg-gray-400">
                       Respond

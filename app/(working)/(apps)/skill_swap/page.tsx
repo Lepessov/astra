@@ -107,7 +107,7 @@ const SkillSwapPage: React.FC = () => {
                 <p>{item.content}</p>
               
                 <span>Description</span> <br/>
-                <span className="flex items-center"><Clock9/> {item.created_at}</span> <br/>
+                {/* <span className="flex items-center"><Clock9/> {item.created_at}</span> <br/> */}
                 <Link href={`ss_posts/${item.id}`}>
                   <Button  className="mx-auto min-w-52 window-sm bg-[#212153] rounded-full text-white hover:bg-gray-400">
                       Respond
