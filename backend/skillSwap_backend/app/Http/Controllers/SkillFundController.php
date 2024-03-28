@@ -55,13 +55,17 @@ class SkillFundController extends Controller
     public function mainIndex(): JsonResponse
     {
         $posts = SkillFund::query()
-            ->select('skill_funds.title',
-                'skill_funds.content',
-                'skill_funds.status',
+            ->select(
+                'skill_funds.id',
+                'skill_funds.title',
                 'skill_funds.photo',
+                'skill_funds.content',
+                'skill_funds.amount_money',
+                'skill_funds.planning_money',
                 'skill_funds.created_at',
-                'students.name',
-                'students.surname')
+                'skill_funds.updated_at',
+            )
+            ->with('categories:name')
             ->join('students', 'skill_funds.student_id', '=', 'students.id')
             ->latest()
             ->take(5)
@@ -72,7 +76,19 @@ class SkillFundController extends Controller
 
     public function index(): JsonResponse
     {
-        $skillFunds = SkillFund::query()->paginate(10);
+        $skillFunds = SkillFund::query()
+            ->select(
+                'skill_funds.id',
+                'skill_funds.title',
+                'skill_funds.photo',
+                'skill_funds.content',
+                'skill_funds.amount_money',
+                'skill_funds.planning_money',
+                'skill_funds.created_at',
+                'skill_funds.updated_at',
+            )
+            ->with('categories:name')
+            ->paginate(10);
 
         return response()->json([
             'success' => true,
